@@ -4,7 +4,6 @@ require("dotenv").config();
 // Imports
 const express = require("express");
 const cors = require("cors");
-const sanitize = require("sanitize");
 
 // Create app
 const app = express();
@@ -13,38 +12,38 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ FIXED CORS (allow your frontend)
+// ✅ CORS (for both local + production)
 app.use(
   cors({
-    origin: "http://localhost:2090", // your frontend port
+    origin: ["http://localhost:2090", "*"], // replace * with frontend URL later
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
-const customerRoutes = require("./Routes/customer.routes");
 
-app.use("/api", customerRoutes);
-// ✅ Routes (with /api prefix)
-const router = require("./Routes");
-app.use("/api", router);
-
-// Port (use different from frontend)
-const port = process.env.PORT || 3000;
-const orderRoutes = require("./Routes/order.routes");
-
-app.use("/api/order", orderRoutes);
-
-const vehicleRoutes = require("./Routes/vehicle.routes");
-app.use("/api/vehicle", vehicleRoutes);
-
-
-const serviceRoutes = require("./Routes/service.routes");
-
-app.use("/api", serviceRoutes);
-// Start server
-app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
+// ✅ Root route (FIX: Cannot GET /)
+app.get("/", (req, res) => {
+  res.send("Backend is running on Render 🚀");
 });
 
-// Export
+// ========================
+// ROUTES
+// ========================
+
+const customerRoutes = require("./Routes/customer.routes");
+const orderRoutes = require("./Routes/order.routes");
+const vehicleRoutes = require("./Routes/vehicle.routes");
+const serviceRoutes = require("./Routes/service.routes");
+const mainRouter = require("./Routes");
+
+// Better structure (recommended)
+app.use("/api/customers", customerRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/vehicles", vehicleRoutes);
+app.use("/api/services", serviceRoutes);
+app.use("/api", mainRouter);
+
+// ========================
+// EXPORT (IMPORTANT FOR RENDER)
+// ========================
 module.exports = app;
