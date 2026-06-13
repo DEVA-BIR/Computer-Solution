@@ -3,8 +3,7 @@ const router = express.Router();
 
 const customerController = require("../Controllers/customer.controller");
 
-// ✅ REMOVE /customers from all routes
-
+// ✅ DO NOT repeat /customers here
 router.post("/", customerController.createCustomer);
 router.get("/", customerController.getAllCustomers);
 router.put("/:id", customerController.updateCustomer);

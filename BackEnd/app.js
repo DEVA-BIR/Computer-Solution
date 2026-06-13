@@ -1,50 +1,26 @@
-// Load environment variables FIRST
 require("dotenv").config();
-
-// Imports
 const express = require("express");
 const cors = require("cors");
-const sanitize = require("sanitize");
 
-// Create app
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ FIXED CORS (allow your frontend)
-app.use(
-  cors({
-    origin: "http://localhost:2090", // your frontend port
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-const customerRoutes = require("./routes/customer.routes");
+// CORS (safe for now)
+app.use(cors({ origin: "*" }));
 
-app.use("/api", customerRoutes);
-// ✅ Routes (with /api prefix)
-const router = require("./Routes");
-app.use("/api", router);
-
-// Port (use different from frontend)
-const port = process.env.PORT || 3000;
-const orderRoutes = require("./routes/order.routes");
-
-app.use("/api/order", orderRoutes);
-
-const vehicleRoutes = require("./routes/vehicle.routes");
-app.use("/api/vehicle", vehicleRoutes);
-
-
-const serviceRoutes = require("./Routes/service.routes");
-
-app.use("/api", serviceRoutes);
-// Start server
-app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
+// ✅ TEST ROUTE (fixes "Cannot GET /")
+app.get("/", (req, res) => {
+  res.send("Backend is live 🚀");
 });
 
-// Export
+// ROUTES
+app.use("/api/customers", require("./Routes/customer.routes"));
+app.use("/api/orders", require("./Routes/order.routes"));
+app.use("/api/vehicles", require("./Routes/vehicle.routes"));
+app.use("/api/services", require("./Routes/service.routes"));
+app.use("/api", require("./Routes"));
+
+// EXPORT ONLY (IMPORTANT for Render)
 module.exports = app;
