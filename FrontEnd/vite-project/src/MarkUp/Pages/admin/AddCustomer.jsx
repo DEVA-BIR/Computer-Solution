@@ -1,6 +1,6 @@
 import React from 'react';
 // Import the AddCustomerForm component 
-import AddCustomerForm from '../../Component/Admin/AddCustomer/AddCustomerForm';
+import AddCustomerForm from '../../Component/Admin/AddCustomer/AddCustomerForm.jsx';
 // Import the AdminMenu component 
 import AdminMenu from '../../Component/Admin/AdminMenu';
 

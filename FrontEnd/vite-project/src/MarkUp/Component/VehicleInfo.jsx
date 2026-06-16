@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from '../../Context/AuthContxt';
 import AdminMenu from "../Component/Admin/AdminMenu";
 import LoginForm from '../Component/LoginForm/LoginForm';
-import AdminDashboard from './AdminDashboard';
+import AdminDashBoard from './AdminDashBoard';
 import AddVehicle from './Admin/AddVehicle/AddVehicle'; 
 
 
