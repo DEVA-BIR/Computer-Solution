@@ -14,7 +14,11 @@ app.use(cors({ origin: "*" }));
 app.get("/", (req, res) => {
   res.send("Backend is live 🚀");
 });
+const PORT = process.env.PORT || 3000;
 
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 // ROUTES
 app.use("/api/customers", require("./Routes/customer.routes"));
 app.use("/api/orders", require("./Routes/order.routes"));
