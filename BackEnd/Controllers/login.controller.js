@@ -38,9 +38,14 @@ async function logIn(req, res, next) {
       message: "Employee logged in successfully",
       data: sendBack,
     });
-  } catch (error) {
+  }  catch (error) {
+  console.error("Login Error:", error);
 
-  }
+  res.status(500).json({
+    status: "error",
+    message: error.message,
+  });
+}
 }
 
 // Export the functions 
