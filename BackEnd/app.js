@@ -27,7 +27,9 @@ app.use("/api", customerRoutes);
 // ✅ Routes (with /api prefix)
 const router = require("./Routes");
 app.use("/api", router);
-
+app.get("/", (req, res) => {
+  res.send("Backend is live 🚀");
+});
 // Port (use different from frontend)
 const port = process.env.PORT || 3000;
 const orderRoutes = require("./routes/order.routes");
