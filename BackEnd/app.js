@@ -21,7 +21,7 @@ app.use(
     credentials: true,
   })
 );
-const customerRoutes = require("./routes/customer.routes");
+const customerRoutes = require("./Routes/customer.routes");
 
 app.use("/api", customerRoutes);
 // ✅ Routes (with /api prefix)
@@ -32,11 +32,11 @@ app.get("/", (req, res) => {
 });
 // Port (use different from frontend)
 const port = process.env.PORT || 3000;
-const orderRoutes = require("./routes/order.routes");
+const orderRoutes = require("./Routes/order.routes");
 
 app.use("/api/order", orderRoutes);
 
-const vehicleRoutes = require("./routes/vehicle.routes");
+const vehicleRoutes = require("./Routes/vehicle.routes");
 app.use("/api/vehicle", vehicleRoutes);
 
 
