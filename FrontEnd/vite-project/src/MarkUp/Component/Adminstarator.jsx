@@ -21,7 +21,7 @@ import AdminDashBoard from './AdminDashBoard';
                 <AdminMenu />
               </div>
               <div className="col-md-9 admin-right-side">
-                <AdminDashboard />
+                <AdminDashBoard />
               </div>
             </div>
           </div>
