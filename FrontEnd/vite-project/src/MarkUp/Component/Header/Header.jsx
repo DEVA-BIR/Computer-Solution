@@ -17,16 +17,17 @@ function Header() {
     setMenuOpen(false);
   };
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <header className="main-header header-style-one">
-      {/* Header Top */}
+
+      {/* TOP BAR */}
       <div className="header-top">
         <div className="auto-container">
           <div className="inner-container">
             <div className="left-column">
-              <div className="text">
-                # Enjoy The Best While We Fix Your Car
-              </div>
+              <div className="text"># Enjoy The Best While We Fix Your Car</div>
               <div className="office-hour">
                 Monday - Saturday 7:00AM - 6:00PM
               </div>
@@ -47,93 +48,72 @@ function Header() {
         </div>
       </div>
 
-      {/* Header Upper */}
+      {/* HEADER UPPER */}
       <div className="header-upper">
         <div className="auto-container">
           <div className="inner-container">
-            {/* Logo */}
+
+            {/* LOGO */}
             <div className="logo-box">
-              <Link to="/">
-                <img src={Logo} alt="Garage Logo" />
+              <Link to="/" onClick={closeMenu}>
+                <img src={Logo} alt="Logo" />
               </Link>
             </div>
 
-            {/* Hamburger */}
+            {/* HAMBURGER */}
             <div
               className="hamburger"
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              <i className={menuOpen ? "fa fa-times" : "fa fa-bars"}></i>
+              <i className={menuOpen ? "fa fa-times" : "fa fa-bars"} />
             </div>
 
-            {/* Right Side */}
+            {/* NAV */}
             <div className="right-column">
-              <div className="nav-outer">
-                <nav className="main-menu">
-                  <ul className={menuOpen ? "navigation active" : "navigation"}>
-                    <li>
-                      <Link to="/" onClick={() => setMenuOpen(false)}>
-                        Home
-                      </Link>
-                    </li>
+              <nav className="main-menu">
+                <ul className={`navigation ${menuOpen ? "active" : ""}`}>
 
-                    <li>
-                      <Link to="/about" onClick={() => setMenuOpen(false)}>
-                        About
-                      </Link>
-                    </li>
+                  <li><Link to="/" onClick={closeMenu}>Home</Link></li>
+                  <li><Link to="/about" onClick={closeMenu}>About</Link></li>
+                  <li><Link to="/services" onClick={closeMenu}>Services</Link></li>
+                  <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
 
+                  {isAdminOrManager && (
                     <li>
-                      <Link to="/services" onClick={() => setMenuOpen(false)}>
-                        Services
-                      </Link>
+                      <Link to="/admin" onClick={closeMenu}>Admin</Link>
                     </li>
+                  )}
 
-                    <li>
-                      <Link to="/contact" onClick={() => setMenuOpen(false)}>
-                        Contact
+                  {/* MOBILE AUTH */}
+                  <li className="mobile-auth">
+                    {isLogged ? (
+                      <Link
+                        to="/"
+                        onClick={logOut}
+                        className="theme-btn btn-style-one blue"
+                      >
+                        Log out
                       </Link>
-                    </li>
-
-                    {isAdminOrManager && (
-                      <li>
-                        <Link to="/admin" onClick={() => setMenuOpen(false)}>
-                          Admin
-                        </Link>
-                      </li>
+                    ) : (
+                      <Link
+                        to="/login"
+                        onClick={closeMenu}
+                        className="theme-btn btn-style-one"
+                      >
+                        Login
+                      </Link>
                     )}
+                  </li>
+                </ul>
+              </nav>
 
-                    {/* Mobile Login/Logout */}
-                    <li className="mobile-auth">
-                      {isLogged ? (
-                        <Link
-                          to="/"
-                          onClick={logOut}
-                          className="theme-btn btn-style-one blue"
-                        >
-                          Log out
-                        </Link>
-                      ) : (
-                        <Link
-                          to="/login"
-                          className="theme-btn btn-style-one"
-                          onClick={() => setMenuOpen(false)}
-                        >
-                          Login
-                        </Link>
-                      )}
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-
-              {/* Desktop Login/Logout */}
+              {/* DESKTOP AUTH */}
               <div className="desktop-auth">
                 {isLogged ? (
                   <Link
                     to="/"
-                    className="theme-btn btn-style-one blue"
                     onClick={logOut}
+                    className="theme-btn btn-style-one blue"
                   >
                     Log out
                   </Link>
@@ -144,26 +124,19 @@ function Header() {
                 )}
               </div>
             </div>
+
           </div>
         </div>
       </div>
 
-      {/* Sticky Header */}
-      <div className="sticky-header">
-        <div className="header-upper">
-          <div className="auto-container">
-            <div className="inner-container">
-              <div className="logo-box">
-                <Link to="/">
-                  <img src={Logo} alt="Garage Logo" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* OVERLAY */}
+      {menuOpen && (
+        <div
+          className="nav-overlay active"
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
 
-      <div className="nav-overlay"></div>
     </header>
   );
 }
