@@ -1,4 +1,58 @@
+html, body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column !important;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+}
+@media (max-width: 768px) {
+  * {
+    max-width: 100%;
+  }
+
+  input, button, select, textarea {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1.1rem; }
+  p  { font-size: 0.95rem; }
+}
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .header nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+/***********************************/
 /* Custom styles for the garage app */
+
 .signin-signout {
   padding: 0 55px;
 }
@@ -1029,4 +1083,107 @@ background: #dcfce7;
 .btn-primary:hover {
   background-color: #D90404 !important;
   border-color: #D90404 !important;
+}
+/* ================= HEADER BASE ================= */
+
+.main-header {
+  background: #fff;
+  width: 100%;
+}
+
+.header-top {
+  background: #111827;
+  color: #fff;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.header-top .inner-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-upper .inner-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.logo {
+  width: 120px;
+}
+
+/* NAVIGATION DESKTOP */
+.navigation {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.navigation li a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  .header-top .inner-container,
+  .header-upper .inner-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  /* show hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* hide menu */
+  .main-menu {
+    width: 100%;
+  }
+
+  .navigation {
+    display: none;
+    flex-direction: column;
+    background: #111827;
+    width: 100%;
+    padding: 15px 0;
+  }
+
+  /* when open */
+  .main-menu.open .navigation {
+    display: flex;
+  }
+
+  .navigation li {
+    padding: 10px 0;
+  }
+
+  .navigation li a {
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .phone-number {
+    text-align: center;
+    width: 100%;
+  }
 }
