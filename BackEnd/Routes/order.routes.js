@@ -4,14 +4,14 @@ const router = express.Router();
 const orderController = require("../Controllers/order.controller");
 
 // CREATE ORDER
-router.post("/", orderController.createOrder);
+router.post("/order", orderController.createOrder);
 
 // GET ALL ORDERS
-router.get("/", orderController.getAllOrders);
+router.get("/order", orderController.getAllOrders);
 
 // GET SINGLE ORDER
-router.get("/:id", orderController.getSingleOrder);
-router.put("/:id", orderController.updateOrder);
-router.delete("/:id", orderController.deleteOrder);
+router.get("/order/:id", orderController.getSingleOrder);
+router.put("/order/:id", orderController.updateOrder);
+router.delete("/order/:id", orderController.deleteOrder);
 
 module.exports = router;

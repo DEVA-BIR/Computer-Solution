@@ -4,9 +4,9 @@ const router = express.Router();
 const customerController = require("../Controllers/customer.controller");
 
 // ✅ DO NOT repeat /customers here
-router.post("/", customerController.createCustomer);
-router.get("/", customerController.getAllCustomers);
-router.put("/:id", customerController.updateCustomer);
-router.delete("/:id", customerController.deleteCustomer);
+router.post("/customers", customerController.createCustomer);
+router.get("/customers", customerController.getAllCustomers);
+router.put("/customers/:id", customerController.updateCustomer);
+router.delete("/customers/:id", customerController.deleteCustomer);
 
 module.exports = router;
