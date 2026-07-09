@@ -1,4 +1,7 @@
+
+/***********************************/
 /* Custom styles for the garage app */
+
 .signin-signout {
   padding: 0 55px;
 }
@@ -1029,4 +1032,631 @@ background: #dcfce7;
 .btn-primary:hover {
   background-color: #D90404 !important;
   border-color: #D90404 !important;
+}
+
+/* ==========================
+   TABLET RESPONSIVE
+   ========================== */
+@media screen and (max-width: 992px) {
+
+  .dashboard-container {
+    padding: 25px;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-header p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+
+/* ==========================
+   MOBILE RESPONSIVE
+   ========================== */
+@media screen and (max-width: 768px) {
+
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .dashboard-header {
+    text-align: center;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .dashboard-header p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .dashboard-card {
+    width: 100%;
+    min-height: 140px;
+    padding: 20px;
+  }
+
+  .dashboard-card h3 {
+    font-size: 20px;
+  }
+
+  .dashboard-card small {
+    font-size: 11px;
+  }
+
+  .dashboard-card span {
+    font-size: 13px;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+  }
+}
+
+
+/* ==========================
+   SMALL MOBILE
+   ========================== */
+@media screen and (max-width: 480px) {
+
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-header p {
+    font-size: 13px;
+  }
+
+  .dashboard-card {
+    padding: 15px;
+  }
+
+  .dashboard-card h3 {
+    font-size: 18px;
+  }
+
+  .card-icon {
+    font-size: 1.8rem;
+  }
+}
+/* ===========================
+   TABLE RESPONSIVE
+=========================== */
+
+.table-responsive,
+.table {
+  width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+
+  .contact-section,
+  .container,
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  table {
+    min-width: 900px;
+  }
+
+  h1,
+  h2 {
+    font-size: 2rem;
+  }
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media screen and (max-width: 768px) {
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  table {
+    min-width: 850px;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .fw-bold.fs-5 {
+    text-align: center;
+    font-size: 1rem !important;
+  }
+
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .pagination button {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  td,
+  th {
+    white-space: nowrap;
+    font-size: 13px;
+  }
+}
+
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media screen and (max-width: 480px) {
+
+  h1,
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .pagination button {
+    width: 100%;
+    max-width: 180px;
+  }
+
+  td,
+  th {
+    font-size: 12px;
+  }
+}
+/* ===== ADD VEHICLE RESPONSIVE ===== */
+
+.customer-page{
+  padding:20px;
+}
+
+.section-row{
+  display:flex;
+  gap:25px;
+  margin-bottom:30px;
+  align-items:flex-start;
+}
+
+.circle-box{
+  width:90px;
+  height:90px;
+  min-width:90px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#D90404;
+  color:#fff;
+  font-weight:600;
+}
+
+.section-content{
+  flex:1;
+}
+
+.vehicle-display{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.vehicle-card{
+  padding:20px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  background:#fff;
+}
+
+.vehicle-form-container form,
+.edit-form{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.vehicle-form-container input,
+.edit-form input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:5px;
+}
+
+.vehicle-form-container button{
+  grid-column:1/-1;
+  padding:12px;
+}
+
+@media (max-width:768px){
+
+  .customer-page{
+    padding:15px;
+  }
+
+  .section-row{
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+  }
+
+  .section-content{
+    width:100%;
+  }
+
+  .vehicle-display,
+  .vehicle-form-container form,
+  .edit-form{
+    grid-template-columns:1fr;
+  }
+
+  .vehicle-form-container button,
+  .delete-btn{
+    width:100%;
+    grid-column:auto;
+  }
+
+  h2{
+    font-size:1.5rem;
+  }
+}
+
+@media (max-width:480px){
+
+  .customer-page{
+    padding:10px;
+  }
+
+  .circle-box{
+    width:70px;
+    height:70px;
+    min-width:70px;
+  }
+
+  .vehicle-card{
+    padding:15px;
+  }
+
+  h2{
+    font-size:1.3rem;
+  }
+
+  .vehicle-form-container input,
+  .edit-form input{
+    padding:10px;
+    font-size:14px;
+  }
+}
+/* ===== COMMON RESPONSIVE CSS ===== */
+
+img{
+  max-width:100%;
+  height:auto;
+}
+
+.features-row,
+.section-row,
+.wrapper-box{
+  display:flex;
+  gap:20px;
+}
+
+.vehicle-display{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.contact-map iframe{
+  width:100% !important;
+  height:400px;
+}
+
+@media (max-width:768px){
+
+  .video-section{
+    text-align:center;
+  }
+
+  .video-section h2,
+  .page-title h2,
+  .sec-title h2{
+    font-size:2rem;
+    line-height:1.3;
+  }
+
+  .features-row,
+  .wrapper-box,
+  .section-row{
+    flex-direction:column;
+  }
+
+  .left,
+  .right,
+  .left-column,
+  .right-column,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-4{
+    width:100%;
+  }
+
+  .service-block-one{
+    margin-bottom:20px;
+  }
+
+  .images-wrapper{
+    text-align:center;
+  }
+
+  .year-experience{
+    position:static !important;
+    margin-top:15px;
+  }
+
+  .contact-title,
+  .sec-title,
+  .page-title{
+    text-align:center;
+  }
+
+  .page-breadcrumb{
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .contact-map iframe{
+    height:300px;
+  }
+}
+
+@media (max-width:480px){
+
+  .auto-container{
+    padding:0 15px;
+  }
+
+  .video-section h2,
+  .page-title h2,
+  .sec-title h2{
+    font-size:1.6rem;
+  }
+
+  h4{
+    font-size:18px;
+  }
+
+  .text,
+  p,
+  li{
+    font-size:14px;
+  }
+
+  .theme-btn{
+    width:100%;
+    text-align:center;
+  }
+
+  .contact-map iframe{
+    height:250px;
+  }
+}
+/* ============================
+   MOBILE HEADER
+============================= */
+
+.mobile-nav-toggler {
+    display: none;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 99999;
+}
+
+.mobile-nav-toggler .bar {
+    width: 28px;
+    height: 3px;
+    background: #08194a;
+    transition: .35s;
+    border-radius: 4px;
+}
+
+/* Hamburger Animation */
+
+.mobile-nav-toggler.active .bar:nth-child(1){
+    transform: rotate(45deg) translate(7px,7px);
+}
+
+.mobile-nav-toggler.active .bar:nth-child(2){
+    opacity:0;
+}
+
+.mobile-nav-toggler.active .bar:nth-child(3){
+    transform: rotate(-45deg) translate(6px,-6px);
+}
+
+
+/* ============================
+   MOBILE RESPONSIVE
+============================= */
+
+@media (max-width:991px){
+
+    .header-upper .inner-container{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        position:relative;
+    }
+
+    .logo-box{
+        margin:auto;
+    }
+
+    .mobile-nav-toggler{
+        display:flex;
+        position:absolute;
+        left:15px;
+        top:50%;
+        transform:translateY(-50%);
+    }
+
+    .auth-btn-container{
+        display:none;
+    }
+
+    .main-header .nav-outer{
+        position:static;
+    }
+
+    /* Hide Desktop Menu */
+
+    .main-menu{
+        display:none !important;
+    }
+
+    /* Show Mobile Menu */
+
+    .main-menu.open{
+        display:block !important;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background:#fff;
+        box-shadow:0 10px 25px rgba(0,0,0,.12);
+        z-index:9999;
+        animation:slideDown .3s ease;
+    }
+
+    .main-menu.open .navigation{
+        display:flex;
+        flex-direction:column;
+        margin:0;
+        padding:15px 0;
+        width:100%;
+    }
+
+    .main-menu.open .navigation li{
+        width:100%;
+        margin:0;
+        padding:0;
+        border-bottom:1px solid #eee;
+    }
+
+    .main-menu.open .navigation li:last-child{
+        border:none;
+    }
+
+    .main-menu.open .navigation li a{
+        display:block;
+        padding:16px 25px;
+        text-align:left;
+        font-size:17px;
+        color:#222;
+    }
+
+    .main-menu.open .navigation li a:hover{
+        background:#08194a;
+        color:#fff;
+    }
+
+}
+
+/* Desktop */
+
+@media (min-width:992px){
+
+    .mobile-nav-toggler{
+        display:none !important;
+    }
+
+    .main-menu{
+        display:block !important;
+    }
+
+}
+
+/* Animation */
+
+@keyframes slideDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+.mobile-login{
+    display:none;
+}
+
+@media (max-width:991px){
+
+    .auth-btn-container{
+        display:none;
+    }
+
+    .main-menu.open .mobile-login{
+        display:block;
+        padding:20px;
+        text-align:center;
+    }
+
+    .main-menu.open .mobile-login a{
+        display:block;
+        width:100%;
+    }
+
 }

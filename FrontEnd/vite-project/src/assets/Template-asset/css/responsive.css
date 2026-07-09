@@ -45,15 +45,15 @@
 	}
 }
 
-@media only screen and (max-width: 1139px){
-	/* Default */
-	.main-header .nav-outer .main-menu,
-	.sticky-header{
-		display: none !important;
-	}
-	.nav-outer .mobile-nav-toggler{
-		display: block;
-	}
+@media only screen and (max-width:1139px){
+
+.sticky-header{
+    display:none !important;
+}
+
+.nav-outer .mobile-nav-toggler{
+    display:flex;
+}
 	.main-header.header-style-two .header-info-right {
 		display: none;
 	}

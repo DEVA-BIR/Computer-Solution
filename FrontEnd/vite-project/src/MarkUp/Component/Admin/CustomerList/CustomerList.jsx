@@ -110,7 +110,7 @@ const CustomerList = () => {
                 {errorMsg}
               </div>
             )}
-
+<div className="table-responsive">
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -208,6 +208,7 @@ const CustomerList = () => {
                 </button>
 
               </div>
+          </div>
           </div>
         </section>
       )}

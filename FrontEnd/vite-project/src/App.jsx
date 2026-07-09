@@ -61,7 +61,7 @@ return (
           } />
           <Route path="/admin/AddEmployee"
           element={
-            <PrivateAuthRoute roles={[3]}>
+            <PrivateAuthRoute roles={[2,3]}>
               <AddEmployee />
             </PrivateAuthRoute>
           } />
@@ -79,7 +79,7 @@ return (
           } />
            <Route path="/admin/AdminService"
           element={
-            <PrivateAuthRoute roles={[3]}>
+            <PrivateAuthRoute roles={[2,3]}>
               <AdminService />
             </PrivateAuthRoute>
           } />

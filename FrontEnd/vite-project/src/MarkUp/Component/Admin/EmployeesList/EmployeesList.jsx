@@ -111,7 +111,7 @@ const EmployeesList = () => {
                 {errorMsg}
               </div>
             )}
-
+<div className="table-responsive">
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -215,6 +215,7 @@ const EmployeesList = () => {
 
             </div>
 
+          </div>
           </div>
         </section>
       )}
