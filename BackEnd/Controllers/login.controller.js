@@ -13,13 +13,17 @@ async function logIn(req, res, next) {
     const employee = await loginService.logIn(employeeData);
     // If the employee is not found
     if (employee.status === "fail") {
-      res.status(403).json({
-        status: employee.status,
-        message: employee.message,
-      });
-      // console.log(employee.message);
-    }
-    // If successful, send a response to the client
+  return res.status(403).json({
+    status: employee.status,
+    message: employee.message,
+  });
+}
+   if (employee.status === "error") {
+  return res.status(500).json({
+    status: employee.status,
+    message: employee.message,
+  });
+} // If successful, send a response to the client
     const payload = {
       employee_id: employee.data.employee_id,
       employee_email: employee.data.employee_email,
