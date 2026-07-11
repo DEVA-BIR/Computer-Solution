@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ FIXED CORS (allow your frontend)
 app.use(
   cors({
-    origin: "https://garage-management-rho.vercel.app", // your frontend port
+    origin: "https://garage-management-clone.vercel.app", // your frontend port
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
