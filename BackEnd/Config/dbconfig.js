@@ -9,8 +9,11 @@ const dbConfig = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
-};
 
+ ssl: {
+    rejectUnauthorized: true,
+  },
+};
 // Create connection pool
 const pool = mysql.createPool(dbConfig);
 
