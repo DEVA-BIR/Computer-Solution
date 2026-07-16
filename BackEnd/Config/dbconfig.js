@@ -11,7 +11,7 @@ const dbConfig = {
   port: process.env.DB_PORT,
 
  ssl: {
-    rejectUnauthorized: true,
+    rejectUnauthorized: false,
   },
 };
 // Create connection pool

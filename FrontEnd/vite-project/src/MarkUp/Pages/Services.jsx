@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
 // Images
 import HERO_BG from "../../assets/Images/background/RE-0.jpg";
 import ABOUTBG from "../../assets/Images/background/aboutbg.jpg";
@@ -20,7 +20,7 @@ function Services() {
 
           <ul className="page-breadcrumb">
             <li>
-              <a href="/">home</a>
+              <Link to="/">home</Link>
             </li>
             <li>Services</li>
           </ul>
@@ -59,9 +59,9 @@ function Services() {
                   <h5>Service and Repairs</h5>
                   <h2>{item.title}</h2>
 
-                  <a href="/admin/ServiceDetails" className="read-more">
+                  <Link to="/admin/ServiceDetails" className="read-more">
                     read more +
-                  </a>
+                  </Link>
 
                   <div className="icon">
                     <span className={item.icon}></span>

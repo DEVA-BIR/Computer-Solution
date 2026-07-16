@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 function AdminMenu(props) {
   return (
     <div>
@@ -7,14 +7,14 @@ function AdminMenu(props) {
         <h2>Admin Menu</h2>
       </div>
       <div className="list-group">
-        <a href="/admin" className="list-group-item">Dashboard</a>
-        <a href="/admin/order" className="list-group-item">Orders</a>
-        <a href="/admin/AddOrder" className="list-group-item">New order</a>
-        <a href="/admin/AddEmployee" className="list-group-item">Add employee</a>
-        <a href="/admin/employees" className="list-group-item">Employees</a>
-        <a href="/admin/AddCustomer" className="list-group-item">Add customer</a>
-        <a href="/admin/customers" className="list-group-item">Customers</a>
-        <a href="/admin/AdminService" className="list-group-item">Services</a>
+        <Link to="/admin" className="list-group-item">Dashboard</Link>
+        <Link to="/admin/order" className="list-group-item">Orders</Link>
+        <Link to="/admin/AddOrder" className="list-group-item">New order</Link>
+        <Link to="/admin/AddEmployee" className="list-group-item">Add employee</Link>
+        <Link to="/admin/employees" className="list-group-item">Employees</Link>
+        <Link to="/admin/AddCustomer" className="list-group-item">Add customer</Link>
+        <Link to="/admin/customers" className="list-group-item">Customers</Link>
+        <Link to="/admin/AdminService" className="list-group-item">Services</Link>
       </div>
     </div>
   );
