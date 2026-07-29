@@ -6,12 +6,12 @@ import CustomerList from './CustomerList/CustomerList';
 
      function Customers() {
       // Destructure the auth hook 
-      const { isLogged, isAdmin } = useAuth();
+      const { isLogged, isAdmin, isManager, isEmployee } = useAuth();
     
       if (isLogged) {
     
     
-        if (isAdmin) {
+        if (isAdmin || isManager || isEmployee) {
           return (
             <div>
               <div className="container-fluid admin-pages">

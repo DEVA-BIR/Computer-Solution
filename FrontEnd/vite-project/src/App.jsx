@@ -12,8 +12,12 @@ import Customers from './MarkUp/Component/Admin/Customers'
 import Employees from './MarkUp/Component/Admin/Employees'
 import Order from './MarkUp/Component/Admin/Order'
 import AdminMenu from './MarkUp/Component/Admin/AdminMenu'
+import ManagerMenu from './MarkUp/Component/Admin/ManagerMenu'
+import EmployeeMenu from './MarkUp/Component/Admin/EmployeeMenu'
 import Orders from './MarkUp/Pages/Orders'
 import Adminstarator from './MarkUp/Component/Adminstarator'
+import Managerial from './MarkUp/Component/Managerial'
+import Employeer from './MarkUp/Component/Employeer'
 import AdminService from './MarkUp/Component/Admin/AdminService'
 import ServiceDetails from './MarkUp/Component/Admin/Servicesdetails'
 import OrderEdit from './MarkUp/EditPage/OrderEdit'
@@ -26,12 +30,13 @@ import '../src/assets/Template-asset/css/style.css'
 import '../src/assets/Template-asset/css/responsive.css'
 import '../src/assets/Template-asset/css/color.css'
 import '../src/assets/style/Custom.css'
+//import '../src/assets/style/technology-theme.css'
 import Header from '../src/MarkUp/Component/Header/Header'
 import Footer from '../src/MarkUp/Component/Footer/Footer'
 import Services from '../src/MarkUp/Pages/Services'
 import Contact from '../src/MarkUp/Pages/Contact'
 import About from '../src/MarkUp/Pages/About'
-import VehicleInfo from './MarkUp/Component/VehicleInfo'
+import DeviceInfo from './MarkUp/Component/DeviceInfo'
 
 function App() {
 return (
@@ -44,18 +49,21 @@ return (
       <Route path='/contact' element={<Contact />} />
       <Route path='/login' element={<Login />} />
       <Route path='/admin' element={<Adminstarator />} />
+      <Route path='/managerial' element={<Managerial />} />
+      <Route path='/employeer' element={<Employeer />} />
+
       <Route path ='/orders' element={<Orders />} />
       <Route path="/admin/ServiceDetails" element={<ServiceDetails />} />
             
       <Route path="/admin/customers"
           element={
-            <PrivateAuthRoute roles={[2, 3]}>
+            <PrivateAuthRoute roles={[1,2, 3]}>
               <Customers />
             </PrivateAuthRoute>
           } />
           <Route path="/admin/Order"
           element={
-            <PrivateAuthRoute roles={[2, 3]}>
+            <PrivateAuthRoute roles={[1,2, 3]}>
               <Order />
             </PrivateAuthRoute>
           } />
@@ -67,13 +75,13 @@ return (
           } />
           <Route path="/admin/AddCustomer"
           element={
-            <PrivateAuthRoute roles={[2,3]}>
+            <PrivateAuthRoute roles={[1,2,3]}>
               <AddCustomer />
             </PrivateAuthRoute>
           } />
           <Route path="/admin/AddOrder"
           element={
-            <PrivateAuthRoute roles={[2,3]}>
+            <PrivateAuthRoute roles={[1,2,3]}>
               <AddOrder />
             </PrivateAuthRoute>
           } />
@@ -83,15 +91,15 @@ return (
               <AdminService />
             </PrivateAuthRoute>
           } />
-          <Route path="/admin/VehicleInfo"
+          <Route path="/admin/DeviceInfo"
           element={
             <PrivateAuthRoute roles={[1,2,3]}>
-              <VehicleInfo/>
+              <DeviceInfo/>
             </PrivateAuthRoute>
           } />
           <Route path="/admin/order/edit/:id"
           element={
-            <PrivateAuthRoute roles={[2,3]}>
+            <PrivateAuthRoute roles={[1,2]}>
               <OrderEdit />
             </PrivateAuthRoute>
           } />
@@ -103,7 +111,7 @@ return (
           } />
           <Route path="/admin/employee/edit/:id"
           element={
-            <PrivateAuthRoute roles={[2,3]}>
+            <PrivateAuthRoute roles={[3]}>
               <EmployeeEdit />
             </PrivateAuthRoute>
           } />

@@ -4,7 +4,8 @@ import {
   FaTools,
   FaUserTie,
   FaClipboardList,
-  FaCar,
+  FaLaptop,
+  FaDesktop,
 } from "react-icons/fa";
 
 const AdminDashboardBody = () => {
@@ -16,7 +17,7 @@ const AdminDashboardBody = () => {
       title: "Orders",
       link: "LIST OF ORDERS +",
       path: "/admin/Order",
-      icon: <FaCar />,
+      icon: <FaDesktop />,
     },
     {
       small: "ORDER SERVICES",
@@ -54,13 +55,6 @@ const AdminDashboardBody = () => {
       icon:<FaClipboardList />,
     },
     {
-      small: "VEHICLE SERVICES",
-      title: "New Vehicle",
-      link: "Add Vehicle +",
-      path: "/admin/VehicleInfo",
-      icon: <FaCar />,
-    },
-    {
       small: "ADMIN SERVICES",
       title: "Admin Services",
       link: "Admin Services",
@@ -72,7 +66,7 @@ const AdminDashboardBody = () => {
       title: "Service Details",
       link: "Service Details",
       path: "/admin/ServiceDetails",
-      icon: <FaCar />,
+      icon: <FaLaptop />,
     },
   ];
 

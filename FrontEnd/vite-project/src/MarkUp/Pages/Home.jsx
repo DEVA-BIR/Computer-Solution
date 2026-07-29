@@ -1,44 +1,38 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import CarouselEffect from "../Component/Carousel/Carousel";
 // IMPORT IMAGES
-import RE0 from "../../assets/Images/background/RE-0.jpg";
-import RE1 from "../../assets/Images/background/RE-1.png";
-import RE2 from "../../assets/Images/background/RE-2.png";
-import RE4 from "../../assets/Images/background/RE-4.jpg";
-import RE5 from "../../assets/Images/background/RE5.jpg";
-import RE8 from "../../assets/Images/background/RE8.jpg";
+import RE1 from "../../assets/Images/background/RE1.jpeg";
+import RE2 from "../../assets/Images/background/RE2.jpeg";
+import RE4 from "../../assets/Images/background/RE42.jpeg";
+import RE5 from "../../assets/Images/background/RE_5.jpeg";
+import RE8 from "../../assets/Images/background/RE8.jpeg";
 
 function Home() {
   return (
     <div>
 
       {/* Video Section */}
-      <section className="video-section">
-        <div
-          data-parallax='{"y": 50}'
-          className="sec-bg"
-          style={{
-            backgroundImage: `url(${RE0})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            height: "700px",
-          }}
-        ></div>
+    <section className="video-section">
 
-        <div className="auto-container">
-          <h5>Working since 1999</h5>
+  <CarouselEffect />
 
-          <h2>
-            TuneUp your car
-            <br />
-            to next level
-          </h2>
+  <div className="hero-content">
+    <div className="auto-container">
+      <h5>Serving Customers Since 2020</h5>
 
-          <div className="video-box">
-          </div>
-        </div>
-      </section>
+      <h2>
+        Your Trusted
+        <br />
+       Desu Computer Solution
+      </h2>
 
+      <a href="/about" className="theme-btn btn-style-one">
+        <span>Learn More</span>
+      </a>
+    </div>
+  </div>
+
+</section>
       {/* About Section */}
       <section className="about-section">
         <div className="auto-container">
@@ -57,7 +51,7 @@ function Home() {
       className="year-experience"
       data-parallax='{"y": 30}'
     >
-      <strong>17 </strong> years
+      <strong>5</strong> years
       <br />
       Experience
     </div>
@@ -68,21 +62,21 @@ function Home() {
             <div className="col-lg-7 pl-lg-5">
               <div className="sec-title">
 
-                <h5>Welcome to Our workshop</h5>
+               <h5>Welcome to Desu Computer Solution</h5>
 
-                <h2>We have 17 years experience</h2>
+               <h2>We provide professional computer and electronics services</h2>
 
                 <div className="text">
 
-                  <p>
-                    Bring to the table win-win survival strategies to
-                    ensure proactive domination.
-                  </p>
+                 <p>
+  We specialize in computer, laptop, and mobile device sales, repairs,
+  maintenance, and technical support.
+</p>
 
-                  <p>
-                    Capitalize on low hanging fruit to identify a
-                    ballpark value added activity.
-                  </p>
+<p>
+  Our experienced technicians deliver reliable, affordable, and fast
+  solutions for all your electronic devices.
+</p>
 
                 </div>
 
@@ -113,8 +107,9 @@ function Home() {
             <h2>Our Featured Services</h2>
 
             <div className="text">
-              Bring to the table win-win survival strategies.
-            </div>
+                   Professional repair, maintenance, and sales for computers, laptops,
+                    mobile phones, and accessories.
+        </div>
           </div>
 
           <div className="row">
@@ -122,13 +117,13 @@ function Home() {
             <div className="col-lg-4 service-block-one">
               <div className="inner-box hvr-float-shadow">
 
-                <h5>Service and Repairs</h5>
+                <h5>Computer Repair</h5>
 
                 <h2>Performance Upgrade</h2>
 
-                <Link to="/admin/ServiceDetails" className="read-more">
+                <a href="/admin/ServiceDetails" className="read-more">
                   read more +
-                </Link>
+                </a>
 
                 <div className="icon">
                   <span className="flaticon-power"></span>
@@ -140,13 +135,13 @@ function Home() {
             <div className="col-lg-4 service-block-one">
               <div className="inner-box hvr-float-shadow">
 
-                <h5>Service and Repairs</h5>
+                <h5>Mobile Solutions</h5>
 
-                <h2>Transmission Services</h2>
+              <h2>Mobile Phone Repair</h2>
 
-                <Link to="/admin/ServiceDetails" className="read-more">
+                <a href="/admin/ServiceDetails" className="read-more">
                   read more +
-                </Link>
+                </a>
 
                 <div className="icon">
                   <span className="flaticon-gearbox"></span>
@@ -158,13 +153,13 @@ function Home() {
             <div className="col-lg-4 service-block-one">
               <div className="inner-box hvr-float-shadow">
 
-                <h5>Service and Repairs</h5>
+                <h5>Sales & Support</h5>
 
-                <h2>Break Repair & Service</h2>
+                <h2>Computer Accessories</h2>
 
-                <Link to="/admin/ServiceDetails" className="read-more">
+                <a href="/admin/ServiceDetails" className="read-more">
                   read more +
-                </Link>
+                </a>
 
                 <div className="icon">
                   <span className="flaticon-brake-disc"></span>
@@ -189,9 +184,10 @@ function Home() {
           Customer Satisfaction !!
         </h2>
 
-        <div className="text">
-          We utilize the most recent symptomatic gear.
-        </div>
+       <div className="text">
+  We use the latest diagnostic tools and genuine replacement parts to
+  ensure reliable repairs.
+</div>
       </div>
     </div>
 
@@ -215,8 +211,9 @@ function Home() {
                 <h2>Why Choose Us</h2>
 
                 <div className="text">
-                  Bring to the table win-win survival strategies.
-                </div>
+                        Trusted professionals delivering fast, reliable, and affordable
+                        technology solutions.
+              </div>
 
               </div>
 
@@ -225,7 +222,7 @@ function Home() {
                   <span className="flaticon-mechanic"></span>
                 </div>
 
-                <h4>Certified Expert Mechanics</h4>
+              <h4>Certified Computer Technicians</h4>
               </div>
 
               <div className="icon-box">
@@ -233,7 +230,7 @@ function Home() {
                   <span className="flaticon-wrench"></span>
                 </div>
 
-                <h4>Fast And Quality Service</h4>
+               <h4>Fast & Reliable Repair Services</h4>
               </div>
 
             </div>
@@ -261,10 +258,12 @@ function Home() {
                 <div className="col-md-7">
 
                   <ul className="list">
-                    <li>General Auto Repair & Maintenance</li>
-                    <li>Transmission Repair & Replacement</li>
-                    <li>Tire Repair and Replacement</li>
-                    <li>Wheel Alignment</li>
+                    <li>Desktop & Laptop Repair</li>
+                     <li>Mobile Phone Repair</li>
+                     <li>Printer Installation & Maintenance</li>
+                     <li>Software Installation & Virus Removal</li>
+                    <li>Data Recovery & Backup</li>
+                     <li>Networking & CCTV Installation</li>
                   </ul>
 
                 </div>
@@ -286,11 +285,13 @@ function Home() {
       ></div>
 
       <div className="auto-container">
-        <h5>Working since 1992</h5>
+        <h5>Serving Customers Since 2020</h5>
 
         <h2>
-          We are leader <br /> in Car Mechanical Work
-        </h2>
+                   Every Electronics
+           <br />
+            Problem Solved Here
+             </h2>
       </div>
     </section>
 
@@ -303,17 +304,18 @@ function Home() {
 
             <div className="left-column">
 
-              <h3>Schedule Your Appointment Today</h3>
+             <h3>Need Fast Computer or Mobile Repair?</h3>
 
               <div className="text">
-                Your Automotive Repair & Maintenance Service Specialist
-              </div>
+  Your trusted partner for computer sales, repairs, maintenance, and
+  technical support.
+</div>
 
             </div>
 
             <div className="right-column">
 
-              <div className="phone">1800.456.7890</div>
+              <div className="phone">+251940066308</div>
 
               <div className="btn">
                 <a href="#" className="theme-btn btn-style-one">

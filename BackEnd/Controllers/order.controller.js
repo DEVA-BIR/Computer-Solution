@@ -85,13 +85,13 @@ async function updateOrder(req, res) {
 
     const cleanData = {
       order_status: body.order_status ?? null,
-      vehicle_make: body.vehicle_make ?? null,
-      vehicle_model: body.vehicle_model ?? null,
-      vehicle_year:
+     device_make: body.vehicle_make ?? null,
+     device_model: body.vehicle_model ?? null,
+     device_year:
         body.vehicle_year === "" || body.vehicle_year == null
           ? null
           : Number(body.vehicle_year),
-      vehicle_tag: body.vehicle_tag ?? null,
+     device_tag: body.vehicle_tag ?? null,
     };
 
     await orderService.updateOrder(orderId, cleanData);

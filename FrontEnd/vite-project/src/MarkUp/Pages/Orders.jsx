@@ -4,28 +4,28 @@ import { useAuth } from '../../Context/AuthContxt.jsx';
 
 
 const Orders = () => {
-  const services = [
-    {
-      title: "Tire repairs and changes",
-      desc: "Without good, inflated tires, you loose speed, control, and fuel efficiency, hence the need to get them patched if there's a leak.",
-    },
-    {
-      title: "Brake work",
-      desc: "We all know why brake work is important, especially because one quarter of all Canadian car accidents are caused by a failure to stop.",
-    },
-    {
-      title: "Spark Plug replacement",
-      desc: "Spark plugs are a small part that can cause huge problems. Their job is to ignite the fuel in your engine, helping it start.",
-    },
-    {
-      title: "Brake work",
-      desc: "We all know why brake work is important, especially because one quarter of all Canadian car accidents are caused by a failure to stop.",
-    },
-    {
-      title: "Additional request",
-      desc: "Additional",
-    },
-  ];
+ const services = [
+  {
+    title: "Hardware Diagnosis",
+    desc: "Complete inspection to identify hardware problems and recommend the best repair solution.",
+  },
+  {
+    title: "Operating System Installation",
+    desc: "Install or reinstall Windows, Linux, or other operating systems with all necessary drivers.",
+  },
+  {
+    title: "Virus & Malware Removal",
+    desc: "Remove viruses, malware, and unwanted software while improving system performance.",
+  },
+  {
+    title: "Data Backup & Recovery",
+    desc: "Recover lost files and securely back up important data whenever possible.",
+  },
+  {
+    title: "Final Testing & Quality Check",
+    desc: "Verify that the device is fully functional before returning it to the customer.",
+  },
+];
 
   return (
     <>
@@ -37,10 +37,8 @@ const Orders = () => {
               <h1>Abeba Bikila</h1>
 
               <p>
-                You can track the progress of your order using this page. We
-                will constantly update this page to let you know how we are
-                progressing.
-              </p>
+  Track the repair status of your electronic device. We will update this page regularly so you can monitor the progress of your service request.
+</p>
             </div>
 
             <span className="status-badge">In progress</span>
@@ -69,27 +67,27 @@ const Orders = () => {
 
             {/* CAR */}
             <div className="info-card">
-              <small>CAR IN SERVICE</small>
+             <small>DEVICE IN SERVICE</small>
 
-              <h3>BMW X7 (Gold)</h3>
+              <h3>Dell Inspiron 15 Laptop</h3>
 
               <p>
-                <strong>Vehicle tag:</strong> 0101AD
+                <strong>Device Serial no:</strong> 0101AD
               </p>
 
               <p>
-                <strong>Vehicle year:</strong> 2020
+                <strong>Device year:</strong> 2020
               </p>
 
               <p>
-                <strong>Vehicle mileage:</strong> 12000
+                <strong>Device IMEI:</strong> 12000
               </p>
             </div>
           </div>
 
           {/* SERVICES */}
           <div className="service-box">
-            <small>BMW X7</small>
+            <small>Dell Inspiron 15 Laptop</small>
 
             <h2>Requested service</h2>
 
@@ -102,7 +100,7 @@ const Orders = () => {
                 </div>
 
                 <span className="status-badge small">
-                  In progress
+                 Diagnosing
                 </span>
               </div>
             ))}

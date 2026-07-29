@@ -1,6 +1,6 @@
 import React from "react";
-
-import ABOUTBG from "../../assets/Images/background/aboutbg.jpg";
+import CarouselEffect from "../Component/Carousel/Carousel";
+import ABOUTBG from "../../assets/Images/background/aboutbg.jpeg";
 
 function Contact() {
   return (
@@ -29,8 +29,8 @@ function Contact() {
 
         </div>
 
-        <h1 data-parallax='{"x": 800}'>
-          Repairing
+        <h1 data-parallax='{"x": 900}'>
+          Desu Computer
         </h1>
       </section>
 
@@ -41,12 +41,11 @@ function Contact() {
 
           <div className="contact-title">
 
-            <h2>Drop us message</h2>
+            <h2><h2>Get In Touch</h2></h2>
 
             <div className="text">
-              Praising pain was born and I will give you a complete
-              account of the system.
-            </div>
+  Have questions or need technical assistance? Contact Desu Computer Solution today. We're ready to help with computer repairs, mobile services, networking, and IT support.
+</div>
 
           </div>
 
@@ -90,7 +89,7 @@ function Contact() {
                         <input
                           type="text"
                           name="form_subject"
-                          placeholder="Subject"
+                          placeholder="Service Needed"
                           required
                         />
 
@@ -100,7 +99,7 @@ function Contact() {
 
                         <textarea
                           name="form_message"
-                          placeholder="Message"
+                          placeholder="Describe your issue or request"
                         ></textarea>
 
                       </div>
@@ -116,7 +115,7 @@ function Contact() {
                           className="theme-btn btn-style-one"
                           type="submit"
                         >
-                          <span>Submit now</span>
+                          <span>Send Message</span>
                         </button>
 
                       </div>
@@ -136,12 +135,12 @@ function Contact() {
 
               <div className="inner-column">
 
-                <h4>Our Address</h4>
+                <h4>Contact Information</h4>
 
                 <div className="text">
-                  Completely synergize resource taxing relationships
-                  via premier niche markets.
-                </div>
+                   Visit our office or contact us for professional computer, 
+                   laptop, mobile phone, printer, networking, and IT support services.
+               </div>
 
                 <ul>
 
@@ -150,7 +149,7 @@ function Contact() {
 
                     <span>Address:</span>
 
-                    Bole,DembelCity, Addis Ababa, Ethiopia
+                    Ambo, Oromia, Ethiopia
                   </li>
 
                   <li>
@@ -158,7 +157,7 @@ function Contact() {
 
                     <span>Email:</span>
 
-                    contact@abegarage.com
+                    contact@desucomputersolution.com
                   </li>
 
                   <li>

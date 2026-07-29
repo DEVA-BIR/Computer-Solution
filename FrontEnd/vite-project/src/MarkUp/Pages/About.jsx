@@ -1,13 +1,13 @@
 import React from "react";
-
-import RE0 from "../../assets/Images/background/RE-0.jpg";
-import ABOUTBG2 from "../../assets/Images/background/aboutbg2.jpg";
-import RE1 from "../../assets/Images/background/RE-1.png";
-import RE2 from "../../assets/Images/background/RE-2.png";
-import RE5 from "../../assets/Images/background/RE5.jpg";
-import ABOUT3 from "../../assets/Images/background/RE-4.jpg";
-import IMAGE9 from "../../assets/Images/background/aboutbg2.jpg";
-import ABOUTBG from "../../assets/Images/background/aboutbg.jpg";
+import CarouselEffect from "../Component/Carousel/Carousel";
+import RE0 from "../../assets/Images/background/RE00.jpeg";
+import ABOUTBG2 from "../../assets/Images/background/aboutbg2.jpeg";
+import RE1 from "../../assets/Images/background/RE1.jpeg";
+import RE2 from "../../assets/Images/background/RE2.jpeg";
+import RE5 from "../../assets/Images/background/RE_5.jpeg";
+import ABOUT3 from "../../assets/Images/background/RE4.jpeg";
+import IMAGE9 from "../../assets/Images/background/aboutbg2.jpeg";
+import ABOUTBG from "../../assets/Images/background/aboutbg.jpeg";
 
 function About() {
   return (
@@ -33,7 +33,7 @@ function About() {
         </div>
 
         <h1 data-parallax='{"x": 200}'>
-          Car Repairing
+          Desu Computer 
         </h1>
       </section>
 
@@ -47,23 +47,22 @@ function About() {
               <div className="content">
 
                 <h2>
-                  We are highly skilled mechanics
+                  Professional Computer &
                   <br />
-                  for your car repair
+                  Electronics Solutions
                 </h2>
 
                 <div className="text">
 
                   <p>
-                    Bring to the table win-win survival strategies
-                    to ensure proactive domination.
-                  </p>
+                         Desu Computer Solution provides reliable computer, laptop, printer,
+                         and mobile phone repair services for individuals, businesses, and organizations.
+               </p>
 
                   <p>
-                    Capitalize on low hanging fruit to identify a
-                    ballpark value added activity to beta test.
+                    Our experienced technicians deliver fast, affordable, and professional
+                    solutions using modern diagnostic tools and quality replacement parts.
                   </p>
-
                 </div>
               </div>
             </div>
@@ -109,7 +108,7 @@ function About() {
                   className="year-experience"
                   data-parallax='{"y": 30}'
                 >
-                  <strong>17</strong> years
+                  <strong>5</strong> years
                   <br />
                   Experience
                 </div>
@@ -121,20 +120,20 @@ function About() {
 
               <div className="sec-title">
 
-                <h5>Welcome to Our workshop</h5>
+                <h5>Welcome to Desu Computer Solution</h5>
 
-                <h2>We have 17 years experience</h2>
+                <h2>Providing Trusted Technology Solutions Since 2020</h2>
 
                 <div className="text">
 
-                  <p>
-                    Bring to the table win-win survival strategies
-                    to ensure proactive domination.
-                  </p>
+                 <p>
+                   We specialize in computer and laptop repairs, software installation,
+                   networking, CCTV installation, printer maintenance, and IT support.
+                </p>
 
                   <p>
-                    Capitalize on low hanging fruit to identify a
-                    ballpark value added activity.
+                    Customer satisfaction is our priority. We provide dependable services,
+                    genuine spare parts, and expert technical support at competitive prices.
                   </p>
 
                 </div>
@@ -185,10 +184,10 @@ function About() {
                   </div>
 
                   <div>
-                    <h4>Smart Technology</h4>
+                    <h4>Advanced Diagnostic Technology</h4>
 
                     <div className="text">
-                      Leverage agile frameworks to provide a robust synopsis.
+                     We use modern diagnostic equipment to identify and solve hardware and software problems accurately.
                     </div>
                   </div>
 
@@ -201,10 +200,10 @@ function About() {
                   </div>
 
                   <div>
-                    <h4>Best & Reasonable Prices</h4>
+                    <h4>Affordable Pricing</h4>
 
                     <div className="text">
-                      Iterative approaches to corporate strategy.
+                      Professional services at fair and transparent prices without compromising quality.
                     </div>
                   </div>
 
@@ -217,10 +216,10 @@ function About() {
                   </div>
 
                   <div>
-                    <h4>Timely Delivery</h4>
+                   <h4>Fast Service Delivery</h4>
 
                     <div className="text">
-                      Foster collaborative thinking to further.
+                      Most repairs are completed quickly to minimize downtime for our customers.
                     </div>
                   </div>
 
@@ -257,7 +256,7 @@ function About() {
                 <h2>Why Choose Us</h2>
 
                 <div className="text">
-                  Bring to the table win-win survival strategies.
+                   We are committed to delivering reliable technology solutions with excellent customer service.
                 </div>
               </div>
 
@@ -266,7 +265,7 @@ function About() {
                   <span className="flaticon-mechanic"></span>
                 </div>
 
-                <h4>Certified Expert Mechanics</h4>
+                <h4>Certified IT Technicians</h4>
               </div>
 
               <div className="icon-box">
@@ -274,7 +273,7 @@ function About() {
                   <span className="flaticon-wrench"></span>
                 </div>
 
-                <h4>Fast And Quality Service</h4>
+                <h4>Fast & Reliable Support</h4>
               </div>
 
               <div className="icon-box">
@@ -282,7 +281,7 @@ function About() {
                   <span className="flaticon-price-tag-1"></span>
                 </div>
 
-                <h4>Best Prices in Town</h4>
+                <h4>Affordable Service Rates</h4>
               </div>
 
               <div className="icon-box">
@@ -290,7 +289,7 @@ function About() {
                   <span className="flaticon-trophy"></span>
                 </div>
 
-                <h4>Awarded Workshop</h4>
+                <h4>Trusted by Hundreds of Customers</h4>
               </div>
 
             </div>
@@ -298,7 +297,7 @@ function About() {
             <div className="col-lg-6">
 
               <div className="sec-title style-two">
-                <h2>Addtional Services</h2>
+                <h2>Our Services</h2>
               </div>
 
               <div className="row">
@@ -314,18 +313,18 @@ function About() {
                 <div className="col-md-7">
 
                   <ul className="list">
-                    <li>General Auto Repair & Maintenance</li>
-                    <li>Transmission Repair & Replacement</li>
-                    <li>Tire Repair and Replacement</li>
-                    <li>State Emissions Inspection</li>
-                    <li>Break Job / Break Services</li>
-                    <li>Electrical Diagnostics</li>
-                    <li>Fuel System Repairs</li>
-                    <li>Starting and Charging Repair</li>
-                    <li>Steering and Suspension Work</li>
-                    <li>Emission Repair Facility</li>
-                    <li>Wheel Alignment</li>
-                    <li>Computer Diagnostic Testing</li>
+                    <li>Desktop Computer Repair</li>
+                    <li>Laptop Repair & Maintenance</li>
+                    <li>Mobile Phone Repair</li>
+                    <li>Printer Installation & Repair</li>
+                    <li>Software Installation</li>
+                    <li>Virus Removal & System Optimization</li>
+                    <li>Data Recovery & Backup</li>
+                    <li>Networking & Wi-Fi Setup</li>
+                    <li>CCTV Camera Installation</li>
+                    <li>Computer Accessories Sales</li>
+                    <li>Operating System Installation</li>
+                    <li>IT Technical Support</li> 
                   </ul>
 
                 </div>
@@ -350,13 +349,12 @@ function About() {
 
         <div className="auto-container">
 
-          <h5>Working since 1999</h5>
-
-          <h2>
-            We are leader
+        <h5>Serving Customers Since 2020</h5>
+         <h2>
+              Every Electronics
             <br />
-            in Car Mechanical Work
-          </h2>
+               Problem Solved Here
+             </h2> 
 
           <div className="video-box">
           </div>
@@ -373,9 +371,9 @@ function About() {
             <div className="col-lg-3">
 
               <h2>
-                <span>100%</span> Satisfaction
+                <span>100%</span> Customer
                 <br />
-                Guarantee
+               Satisfaction
               </h2>
 
             </div>
@@ -392,10 +390,10 @@ function About() {
                       <span className="flaticon-customer-service-1"></span>
                     </div>
 
-                    <h4>Quality Support</h4>
+                    <h4>Professional IT Support</h4>
 
                     <div className="text">
-                      Our Repair Services offers quality help programs.
+                      Expert technical assistance for homes, businesses, and organizations.
                     </div>
 
                   </div>
@@ -410,10 +408,10 @@ function About() {
                       <span className="flaticon-car-1"></span>
                     </div>
 
-                    <h4>All Car Makes</h4>
+                    <h4>All Major Computer Brands</h4>
 
                     <div className="text">
-                      Our Repair Services offers quality help programs.
+                      We repair desktops, laptops, printers, and mobile devices from leading brands.
                     </div>
 
                   </div>
@@ -428,10 +426,10 @@ function About() {
                       <span className="flaticon-maintenance"></span>
                     </div>
 
-                    <h4>Variety Services</h4>
+                    <h4>Complete Technology Solutions</h4>
 
                     <div className="text">
-                      Our Repair Services offers quality help programs.
+                     From hardware repairs to networking and software support, we provide complete IT solutions.
                     </div>
 
                   </div>

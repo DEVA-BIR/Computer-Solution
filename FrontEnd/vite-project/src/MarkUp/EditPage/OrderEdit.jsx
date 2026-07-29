@@ -12,10 +12,10 @@ const OrderEdit = () => {
   const [loading, setLoading] = useState(true);
 
   const [orderStatus, setOrderStatus] = useState("");
-  const [vehicleMake, setVehicleMake] = useState("");
-  const [vehicleModel, setVehicleModel] = useState("");
-  const [vehicleYear, setVehicleYear] = useState("");
-  const [vehicleTag, setVehicleTag] = useState("");
+  const [DeviceMake, setDeviceMake] = useState("");
+  const [DeviceModel, setDeviceModel] = useState("");
+  const [DeviceYear, setDeviceYear] = useState("");
+  const [DeviceBrand, setDeviceBrand] = useState("");
 
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -41,10 +41,10 @@ const OrderEdit = () => {
         }
 
         setOrderStatus(data.order_status || "");
-        setVehicleMake(data.vehicle_make || "");
-        setVehicleModel(data.vehicle_model || "");
-        setVehicleYear(data.vehicle_year || "");
-        setVehicleTag(data.vehicle_tag || "");
+        setDeviceMake(data.Device_make || "");
+        setDeviceModel(data.Device_model || "");
+        setDeviceYear(data.Device_year || "");
+        setDeviceBrand(data.Device_brand || "");
 
       } catch (error) {
         console.log("LOAD ERROR:", error);
@@ -67,13 +67,13 @@ const OrderEdit = () => {
 
       const updatedOrder = {
   order_status: orderStatus || null,
-  vehicle_make: vehicleMake || null,
-  vehicle_model: vehicleModel || null,
-  vehicle_year:
-    vehicleYear === "" || vehicleYear === undefined
+  Device_make: DeviceMake || null,
+  Device_model: DeviceModel || null,
+  Device_year:
+    DeviceYear === "" || DeviceYear === undefined
       ? null
-      : Number(vehicleYear),
-  vehicle_tag: vehicleTag || null,
+      : Number(DeviceYear),
+  Device_Brand: DeviceBrand || null,
 };
 
       const orderId = orderData?.order_id || id;
@@ -140,51 +140,51 @@ const OrderEdit = () => {
           </select>
         </div>
 
-        {/* VEHICLE MAKE */}
+        {/* Device MAKE */}
         <div className="mb-3">
-          <label>Vehicle Make</label>
+          <label>Device Make</label>
 
           <input
             type="text"
             className="form-control"
-            value={vehicleMake}
-            onChange={(e) => setVehicleMake(e.target.value)}
+            value={DeviceMake}
+            onChange={(e) => setDeviceMake(e.target.value)}
           />
         </div>
 
-        {/* VEHICLE MODEL */}
+        {/* Device MODEL */}
         <div className="mb-3">
-          <label>Vehicle Model</label>
+          <label>Device Model</label>
 
           <input
             type="text"
             className="form-control"
-            value={vehicleModel}
-            onChange={(e) => setVehicleModel(e.target.value)}
+            value={DeviceModel}
+            onChange={(e) => setDeviceModel(e.target.value)}
           />
         </div>
 
-        {/* VEHICLE YEAR */}
+        {/* Device YEAR */}
         <div className="mb-3">
-          <label>Vehicle Year</label>
+          <label>Device Year</label>
 
           <input
             type="number"
             className="form-control"
-            value={vehicleYear}
-            onChange={(e) => setVehicleYear(e.target.value)}
+            value={DeviceYear}
+            onChange={(e) => setDeviceYear(e.target.value)}
           />
         </div>
 
-        {/* VEHICLE TAG */}
+        {/* Device Brand */}
         <div className="mb-3">
-          <label>Vehicle Tag</label>
+          <label>Device Brand</label>
 
           <input
             type="text"
             className="form-control"
-            value={vehicleTag}
-            onChange={(e) => setVehicleTag(e.target.value)}
+            value={DeviceBrand}
+            onChange={(e) => setDeviceBrand(e.target.value)}
           />
         </div>
 

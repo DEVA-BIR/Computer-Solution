@@ -1,0 +1,1508 @@
+/* =====================================================
+   DESU COMPUTER SOLUTION
+   DARK TECHNOLOGY THEME
+   PART 1 - GLOBAL
+====================================================== */
+
+:root{
+
+    --primary:#2ECC71;
+    --primary-hover:#27AE60;
+
+    --background:#090909;
+    --background-2:#111111;
+    --background-3:#181818;
+
+    --card:#161616;
+
+    --border:#2c2c2c;
+
+    --text:#ffffff;
+    --text-light:#cfcfcf;
+    --text-muted:#9b9b9b;
+
+}
+
+/* =====================================================
+   GLOBAL
+====================================================== */
+
+html{
+    background:var(--background);
+}
+
+body{
+    background:var(--background)!important;
+    color:var(--text)!important;
+}
+
+.page-wrapper{
+    background:var(--background)!important;
+}
+
+section{
+    background:transparent;
+}
+
+.auto-container{
+    background:transparent;
+}
+
+/* =====================================================
+   TYPOGRAPHY
+====================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    color:var(--text)!important;
+}
+
+p,
+span,
+li,
+small{
+    color:var(--text-light)!important;
+}
+
+strong{
+    color:#ffffff;
+}
+
+/* =====================================================
+   LINKS
+====================================================== */
+
+a{
+    color:var(--primary)!important;
+    transition:.3s;
+}
+
+a:hover{
+    color:#65ffb0!important;
+}
+
+/* =====================================================
+   HEADER
+====================================================== */
+
+.header-top{
+    background:#000!important;
+}
+
+.header-upper{
+    background:#0d0d0d!important;
+}
+
+.main-header{
+    background:#0d0d0d!important;
+    box-shadow:none!important;
+}
+
+.main-menu .navigation>li>a{
+    color:#ffffff!important;
+}
+
+.main-menu .navigation>li>a:hover{
+    color:var(--primary)!important;
+}
+
+.main-menu .navigation>li.current>a{
+    color:var(--primary)!important;
+}
+
+/* dropdown */
+
+.main-menu .navigation>li>ul{
+
+    background:#171717!important;
+
+}
+
+.main-menu .navigation>li>ul>li>a{
+
+    color:white!important;
+
+    border-bottom:1px solid #2d2d2d;
+
+}
+
+.main-menu .navigation>li>ul>li>a:hover{
+
+    background:var(--primary)!important;
+
+    color:#000!important;
+
+}
+
+/* =====================================================
+   BUTTONS
+====================================================== */
+
+.theme-btn,
+.btn,
+.btn-style-one,
+.btn-primary{
+
+    background:var(--primary)!important;
+
+    border-color:var(--primary)!important;
+
+    color:#000!important;
+
+    transition:.35s;
+
+}
+
+.theme-btn:hover,
+.btn-style-one:hover,
+.btn-primary:hover{
+
+    background:var(--primary-hover)!important;
+
+    color:white!important;
+
+}
+
+/* =====================================================
+   FORMS
+====================================================== */
+
+input,
+textarea,
+select{
+
+    background:#141414!important;
+
+    color:#fff!important;
+
+    border:1px solid #333!important;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#888!important;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+    border-color:var(--primary)!important;
+
+    box-shadow:0 0 10px rgba(46,204,113,.3);
+
+}
+
+/* =====================================================
+   TABLES
+====================================================== */
+
+table{
+
+    background:#151515!important;
+
+}
+
+table th{
+
+    background:#1f1f1f!important;
+
+    color:white!important;
+
+}
+
+table td{
+
+    background:#151515!important;
+
+    color:#ddd!important;
+
+    border-color:#2d2d2d!important;
+
+}
+
+table tr:hover{
+
+    background:#1b1b1b!important;
+
+}
+
+/* =====================================================
+   CARDS
+====================================================== */
+
+.card,
+.service-item,
+.dashboard-card,
+.info-card,
+.service-box,
+.device-card,
+.selected-customer,
+.external-container,
+.add-order-container,
+.device-display,
+.devices-wrapper{
+
+    background:#151515!important;
+
+    border:1px solid #2b2b2b!important;
+
+    color:white!important;
+
+}
+
+/* =====================================================
+   ICONS
+====================================================== */
+
+.icon,
+.fa,
+.fas,
+.flaticon{
+
+    color:var(--primary)!important;
+
+}
+
+/* =====================================================
+   FOOTER
+====================================================== */
+
+.main-footer{
+
+    background:#050505!important;
+
+}
+
+.footer-bottom{
+
+    background:#000!important;
+
+}
+
+.main-footer h2,
+.main-footer h3,
+.main-footer h4{
+
+    color:white!important;
+
+}
+
+.main-footer p,
+.main-footer li,
+.main-footer span{
+
+    color:#bcbcbc!important;
+
+}
+
+.main-footer a{
+
+    color:#ffffff!important;
+
+}
+
+.main-footer a:hover{
+
+    color:var(--primary)!important;
+
+}
+
+/* =====================================================
+   SCROLL BAR
+====================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#000;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary-hover);
+
+}
+
+/* =====================================================
+   TEXT SELECTION
+====================================================== */
+
+::selection{
+
+    background:var(--primary);
+
+    color:#000;
+
+}
+/* ==========================================================
+   PART 2 - HOMEPAGE DARK THEME
+========================================================== */
+
+/* ---------------- HERO ---------------- */
+
+.banner-section,
+.video-section{
+    background:#090909 !important;
+}
+
+.banner-section:before,
+.video-section:before{
+    background:rgba(0,0,0,.60) !important;
+}
+
+.banner-section h1,
+.banner-section h2,
+.video-section h2{
+    color:#ffffff !important;
+}
+
+.banner-section h5,
+.video-section h5{
+    color:#2ECC71 !important;
+}
+
+.banner-section p,
+.video-section p{
+    color:#d0d0d0 !important;
+}
+
+/* ---------------- ABOUT ---------------- */
+
+.about-section{
+    background:#101010 !important;
+}
+
+.about-section .image img{
+    border-radius:12px;
+}
+
+.about-section .content{
+    color:#d9d9d9 !important;
+}
+
+.about-section h2{
+    color:#ffffff !important;
+}
+
+.about-section .year-experience{
+    background:#2ECC71 !important;
+    color:#000 !important;
+    padding:20px;
+    border-radius:10px;
+}
+
+/* ---------------- FEATURES ---------------- */
+
+.features-section,
+.features-section-two{
+    background:#0d0d0d !important;
+}
+
+.features-section .inner-box,
+.features-section .icon-box{
+    background:#181818 !important;
+    border:1px solid #2d2d2d;
+    transition:.35s;
+}
+
+.features-section .inner-box:hover,
+.features-section .icon-box:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#2ECC71;
+
+    box-shadow:0 15px 40px rgba(46,204,113,.15);
+
+}
+
+.features-section h3,
+.features-section h4{
+
+    color:#ffffff !important;
+
+}
+
+.features-section p{
+
+    color:#c8c8c8 !important;
+
+}
+
+.features-section .icon{
+
+    color:#2ECC71 !important;
+
+    font-size:48px;
+
+}
+
+/* ---------------- SERVICES ---------------- */
+
+.services-section{
+
+    background:#090909 !important;
+
+}
+
+.service-block-one .inner-box,
+.service-block-two{
+
+    background:#181818 !important;
+
+    border:1px solid #2b2b2b !important;
+
+    transition:.35s;
+
+}
+
+.service-block-one .inner-box:hover,
+.service-block-two:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#2ECC71 !important;
+
+    box-shadow:0 20px 45px rgba(46,204,113,.18);
+
+}
+
+.service-block-one h4,
+.service-block-two h4{
+
+    color:#ffffff !important;
+
+}
+
+.service-block-one p,
+.service-block-two p{
+
+    color:#c7c7c7 !important;
+
+}
+
+.service-block-one .icon,
+.service-block-two .icon{
+
+    color:#2ECC71 !important;
+
+}
+
+/* ---------------- WHY CHOOSE US ---------------- */
+
+.why-choose-us,
+.why-choose-us-two{
+
+    background:#111111 !important;
+
+}
+
+.why-choose-us .inner-box{
+
+    background:#181818 !important;
+
+    border:1px solid #2a2a2a;
+
+}
+
+.why-choose-us h2{
+
+    color:#fff !important;
+
+}
+
+.why-choose-us p{
+
+    color:#c9c9c9 !important;
+
+}
+
+.why-choose-us .icon{
+
+    color:#2ECC71 !important;
+
+}
+
+/* ---------------- TEAM ---------------- */
+
+.team-section{
+
+    background:#090909 !important;
+
+}
+
+.team-block-one{
+
+    background:#181818 !important;
+
+    border:1px solid #2c2c2c;
+
+    transition:.35s;
+
+}
+
+.team-block-one:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#2ECC71;
+
+}
+
+.team-block-one h4{
+
+    color:#ffffff !important;
+
+}
+
+.team-block-one span{
+
+    color:#2ECC71 !important;
+
+}
+
+.team-block-one .social-links li a{
+
+    color:#d7d7d7 !important;
+
+}
+
+.team-block-one .social-links li a:hover{
+
+    color:#2ECC71 !important;
+
+}
+
+/* ---------------- TESTIMONIAL ---------------- */
+
+.testimonial-section{
+
+    background:#111111 !important;
+
+}
+
+.testimonial-block{
+
+    background:#181818 !important;
+
+    border:1px solid #2b2b2b;
+
+}
+
+.testimonial-block p{
+
+    color:#d4d4d4 !important;
+
+}
+
+.testimonial-block h4{
+
+    color:#ffffff !important;
+
+}
+
+.testimonial-block .designation{
+
+    color:#2ECC71 !important;
+
+}
+
+/* ---------------- BLOG ---------------- */
+
+.blog-section{
+
+    background:#090909 !important;
+
+}
+
+.news-block-one{
+
+    background:#181818 !important;
+
+    border:1px solid #2c2c2c;
+
+}
+
+.news-block-one h3{
+
+    color:#ffffff !important;
+
+}
+
+.news-block-one p{
+
+    color:#c8c8c8 !important;
+
+}
+
+.news-block-one .meta-info{
+
+    color:#9f9f9f !important;
+
+}
+
+/* ---------------- CTA ---------------- */
+
+.cta-section,
+.cta-section.style-two,
+.cta-section.style-three{
+
+    background:#0c0c0c !important;
+
+}
+
+.cta-section .wrapper-box{
+
+    background:#151515 !important;
+
+    border:2px solid #2ECC71;
+
+    border-radius:15px;
+
+}
+
+.cta-section h2{
+
+    color:#ffffff !important;
+
+}
+
+.cta-section p{
+
+    color:#d2d2d2 !important;
+
+}
+
+/* ---------------- CONTACT ---------------- */
+
+.contact-section{
+
+    background:#101010 !important;
+
+}
+
+.contact-info-widget{
+
+    background:#181818 !important;
+
+    border:1px solid #2c2c2c;
+
+}
+
+.contact-info-widget li{
+
+    color:#d4d4d4 !important;
+
+}
+
+.contact-info-widget .icon{
+
+    color:#2ECC71 !important;
+
+}
+
+/* ---------------- SECTION TITLES ---------------- */
+
+.sec-title h2{
+
+    color:#ffffff !important;
+
+}
+
+.sec-title .text{
+
+    color:#cfcfcf !important;
+
+}
+
+.sec-title h2:before{
+
+    background:#2ECC71 !important;
+
+}
+
+/* ---------------- HOVER GLOW ---------------- */
+
+.service-block-one:hover,
+.service-block-two:hover,
+.team-block-one:hover,
+.news-block-one:hover,
+.testimonial-block:hover,
+.contact-info-widget:hover{
+
+    box-shadow:0 0 35px rgba(46,204,113,.18);
+
+}
+/* ==========================================================
+   PART 3 - ADMIN DASHBOARD DARK THEME
+========================================================== */
+
+/* ==========================================================
+   ADMIN LAYOUT
+========================================================== */
+
+.admin-left-side{
+    background:#080808 !important;
+    border-right:1px solid #222;
+}
+
+.admin-right-side{
+    background:#101010 !important;
+}
+
+.admin-menu{
+    background:#0d0d0d !important;
+    border-bottom:1px solid #222;
+}
+
+.admin-menu h2{
+    color:#fff !important;
+    letter-spacing:2px;
+}
+
+.dashboard-body,
+.customer-page,
+.track-wrapper,
+.admin-edit-container,
+.services-section{
+    background:#0d0d0d !important;
+    color:#fff;
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.admin-left-side .list-group-item{
+    background:#101010 !important;
+    border-bottom:1px solid #232323 !important;
+    color:#cfcfcf !important;
+    transition:.3s;
+}
+
+.admin-left-side .list-group-item:hover{
+    background:#161616 !important;
+    color:#2ECC71 !important;
+}
+
+.admin-left-side .list-group-item.active{
+    background:#2ECC71 !important;
+    color:#000 !important;
+    border-color:#2ECC71 !important;
+}
+
+.admin-left-side a{
+    color:#d8d8d8 !important;
+}
+
+.admin-left-side a:hover{
+    color:#2ECC71 !important;
+}
+
+/* ==========================================================
+   DASHBOARD CARDS
+========================================================== */
+
+.dashboard-card{
+    background:#181818 !important;
+    border:1px solid #2c2c2c !important;
+    border-bottom:4px solid #2ECC71 !important;
+    transition:.35s;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+    border-color:#2ECC71 !important;
+    box-shadow:0 18px 45px rgba(46,204,113,.18);
+}
+
+.dashboard-card h3{
+    color:#fff !important;
+}
+
+.dashboard-card small{
+    color:#9d9d9d !important;
+}
+
+.dashboard-card span{
+    color:#2ECC71 !important;
+}
+
+.card-icon{
+    color:#2ECC71 !important;
+}
+
+/* ==========================================================
+   TABLES
+========================================================== */
+
+.orders-table,
+.table{
+    background:#181818 !important;
+    color:#fff !important;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.table th,
+.orders-table th{
+    background:#2ECC71 !important;
+    color:#000 !important;
+    border:none !important;
+}
+
+.table td,
+.orders-table td{
+    background:#181818 !important;
+    color:#d8d8d8 !important;
+    border-color:#2a2a2a !important;
+}
+
+.table tbody tr:hover,
+.orders-table tbody tr:hover{
+    background:#202020 !important;
+}
+
+.table a{
+    color:#2ECC71 !important;
+}
+
+/* ==========================================================
+   SEARCH BAR
+========================================================== */
+
+.search-box input{
+    background:#181818 !important;
+    border:1px solid #333 !important;
+    color:#fff !important;
+}
+
+.search-box input:focus{
+    border-color:#2ECC71 !important;
+    box-shadow:0 0 15px rgba(46,204,113,.25);
+}
+
+/* ==========================================================
+   PAGINATION
+========================================================== */
+
+.pagination button,
+.page-link{
+    background:#161616 !important;
+    color:#fff !important;
+    border:1px solid #333 !important;
+}
+
+.pagination button:hover,
+.page-link:hover{
+    background:#2ECC71 !important;
+    color:#000 !important;
+}
+
+/* ==========================================================
+   FORMS
+========================================================== */
+
+.admin-edit-container input,
+.admin-edit-container textarea,
+.admin-edit-container select,
+.contact-form input,
+.contact-form textarea,
+.contact-form select{
+
+    background:#181818 !important;
+    color:#fff !important;
+    border:1px solid #333 !important;
+
+}
+
+.admin-edit-container input:focus,
+.admin-edit-container textarea:focus,
+.admin-edit-container select:focus{
+
+    border-color:#2ECC71 !important;
+    box-shadow:0 0 15px rgba(46,204,113,.25);
+
+}
+
+.admin-edit-container h2{
+    color:#fff !important;
+}
+
+.admin-edit-container p{
+    color:#bcbcbc !important;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.submit-btn,
+.btn-primary,
+.theme-btn,
+button{
+
+    background:#2ECC71 !important;
+    border-color:#2ECC71 !important;
+    color:#000 !important;
+
+}
+
+.submit-btn:hover,
+.btn-primary:hover,
+.theme-btn:hover,
+button:hover{
+
+    background:#27AE60 !important;
+    color:#fff !important;
+
+}
+
+.cancel{
+
+    background:#555 !important;
+    color:#fff !important;
+
+}
+
+.cancel:hover{
+
+    background:#777 !important;
+
+}
+
+/* ==========================================================
+   STATUS BADGES
+========================================================== */
+
+.status-badge{
+
+    background:#2ECC71 !important;
+    color:#000 !important;
+
+}
+
+.small{
+
+    background:#1e1e1e !important;
+    color:#fff !important;
+
+}
+
+/* ==========================================================
+   INFO BOXES
+========================================================== */
+
+.info-card,
+.service-box,
+.device-card,
+.device-display,
+.external-container,
+.selected-customer,
+.filter-customers-wrapper,
+.add-order-container,
+.device-form-container{
+
+    background:#181818 !important;
+    border:1px solid #2d2d2d !important;
+    color:#fff !important;
+
+}
+
+.info-card h3,
+.service-box h2,
+.device-card h3{
+
+    color:#fff !important;
+
+}
+
+.info-card p,
+.service-box p,
+.device-card p{
+
+    color:#cfcfcf !important;
+
+}
+
+/* ==========================================================
+   SUCCESS & ERROR
+========================================================== */
+
+.admin-success{
+
+    background:#103d22 !important;
+    color:#7dffaf !important;
+    border-left:5px solid #2ECC71;
+
+}
+
+.admin-error{
+
+    background:#451919 !important;
+    color:#ff9b9b !important;
+    border-left:5px solid #ff3d3d;
+
+}
+
+/* ==========================================================
+   ACTION BUTTONS
+========================================================== */
+
+.edit-btn{
+
+    background:#2ECC71 !important;
+    color:#000 !important;
+
+}
+
+.delete-btn{
+
+    background:#d63031 !important;
+    color:#fff !important;
+
+}
+
+.view-btn{
+
+    background:#0984e3 !important;
+    color:#fff !important;
+
+}
+
+.edit-btn:hover,
+.delete-btn:hover,
+.view-btn:hover{
+
+    opacity:.85;
+
+}
+
+/* ==========================================================
+   ICONS
+========================================================== */
+
+.fa,
+.fas,
+.flaticon,
+.icon{
+
+    color:#2ECC71 !important;
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+.admin-right-side::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.admin-right-side::-webkit-scrollbar-thumb{
+
+    background:#2ECC71;
+
+}
+
+.admin-right-side::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
+/* ============================================================
+   PART 4 - FINAL OVERRIDE FOR YOUR CUSTOM.CSS
+   Place this at the VERY END of custom.css
+============================================================= */
+
+:root{
+    --bg:#0b0f14;
+    --bg2:#111827;
+    --card:#1a2233;
+    --card2:#202b3c;
+    --border:#2d3d56;
+
+    --green:#22c55e;
+    --green-hover:#16a34a;
+
+    --text:#ffffff;
+    --text2:#d1d5db;
+    --muted:#94a3b8;
+}
+
+/* ===========================
+   GLOBAL
+=========================== */
+
+body,
+html,
+.page-wrapper{
+    background:var(--bg)!important;
+    color:var(--text)!important;
+}
+
+/* White containers */
+
+.external-container,
+.devices-wrapper,
+.service-item,
+.selected-customer,
+.filter-customers-wrapper,
+.info-card,
+.service-box,
+.device-card,
+.device-display,
+.device-form-container,
+.add-order-container,
+.orders-table,
+.admin-edit-container,
+.dashboard-card,
+.service-list,
+.customer-page,
+.dashboard-body,
+.track-wrapper{
+
+    background:var(--card)!important;
+    color:var(--text)!important;
+
+}
+
+/* ===========================
+   HEADINGS
+=========================== */
+
+h1,h2,h3,h4,h5,h6{
+    color:#fff!important;
+}
+
+p,
+small,
+span,
+li{
+    color:var(--text2)!important;
+}
+
+/* Blue headings */
+
+.dashboard-header h1,
+.title-row h1,
+.info-card h3,
+.service-box h2,
+.service-item h4,
+.device-card h3,
+.section-content h2,
+.sec-title h2{
+    color:#fff!important;
+}
+
+/* ===========================
+   GREEN ACCENTS
+=========================== */
+
+.validation-error,
+.form-close,
+.edit-btn,
+.service-icons,
+.card-icon{
+
+    color:var(--green)!important;
+
+}
+
+.dashboard-header h1::after,
+.title-line{
+
+    background:var(--green)!important;
+
+}
+
+.circle-box{
+
+    background:var(--green)!important;
+
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.theme-btn,
+.btn-primary,
+.submit-btn,
+button{
+
+    background:var(--green)!important;
+    border-color:var(--green)!important;
+    color:#000!important;
+
+}
+
+.theme-btn:hover,
+.btn-primary:hover,
+.submit-btn:hover{
+
+    background:var(--green-hover)!important;
+    color:#fff!important;
+
+}
+
+/* ===========================
+   FORMS
+=========================== */
+
+input,
+textarea,
+select{
+
+    background:#101826!important;
+    color:#fff!important;
+    border:1px solid var(--border)!important;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#7c8798!important;
+
+}
+
+input:disabled{
+
+    background:#1d2738!important;
+
+}
+
+/* ===========================
+   TABLES
+=========================== */
+
+.orders-table,
+.table{
+
+    background:var(--card)!important;
+
+}
+
+.orders-table th,
+.table th{
+
+    background:var(--green)!important;
+    color:#000!important;
+
+}
+
+.orders-table td,
+.table td{
+
+    background:var(--card)!important;
+    color:#ddd!important;
+    border-color:#34455e!important;
+
+}
+
+.orders-table tr:hover,
+.table tbody tr:hover{
+
+    background:var(--card2)!important;
+
+}
+
+/* ===========================
+   DASHBOARD CARDS
+=========================== */
+
+.dashboard-card,
+.info-card,
+.service-box{
+
+    border-bottom:4px solid var(--green)!important;
+    border-radius:12px;
+
+}
+
+.dashboard-card:hover,
+.service-item:hover,
+.device-card:hover,
+.info-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 45px rgba(34,197,94,.20);
+
+}
+
+/* ===========================
+   ADMIN
+=========================== */
+
+.admin-left-side{
+
+    background:#09101d!important;
+
+}
+
+.admin-menu{
+
+    background:#050b16!important;
+
+}
+
+.admin-right-side{
+
+    background:#0b0f14!important;
+
+}
+
+.admin-left-side .list-group-item{
+
+    background:#09101d!important;
+    color:#d7d7d7!important;
+
+}
+
+.admin-left-side .list-group-item:hover{
+
+    background:#152238!important;
+    color:var(--green)!important;
+
+}
+
+.admin-left-side .list-group-item.active{
+
+    background:var(--green)!important;
+    color:#000!important;
+
+}
+
+/* ===========================
+   PAGINATION
+=========================== */
+
+.page-link,
+.pagination button{
+
+    background:#162234!important;
+    color:#fff!important;
+
+}
+
+.page-link:hover,
+.pagination button:hover{
+
+    background:var(--green)!important;
+    color:#000!important;
+
+}
+
+/* ===========================
+   SUCCESS / ERROR
+=========================== */
+
+.admin-success{
+
+    background:#10381f!important;
+    color:#8fffbb!important;
+
+}
+
+.admin-error{
+
+    background:#451919!important;
+    color:#ffb4b4!important;
+
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero-content{
+
+    background:linear-gradient(
+        rgba(0,0,0,.72),
+        rgba(0,0,0,.55)
+    )!important;
+
+}
+
+.video-section{
+
+    background:#000!important;
+
+}
+
+/* ===========================
+   FEATURES
+=========================== */
+
+.features-row .left{
+
+    background:linear-gradient(135deg,#15803d,#22c55e)!important;
+
+}
+
+.features-row .right{
+
+    background:#000!important;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.main-footer,
+.footer-bottom{
+
+    background:#050505!important;
+
+}
+
+/* ===========================
+   LINKS
+=========================== */
+
+a:hover{
+
+    color:var(--green)!important;
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--green);
+
+}

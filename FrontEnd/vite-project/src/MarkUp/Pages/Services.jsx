@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import CarouselEffect from "../Component/Carousel/Carousel";
 // Images
-import HERO_BG from "../../assets/Images/background/RE-0.jpg";
-import ABOUTBG from "../../assets/Images/background/aboutbg.jpg";
-import RE5 from "../../assets/Images/background/RE5.jpg";
+import HERO_BG from "../../assets/Images/background/RE00.jpeg";
+import ABOUTBG from "../../assets/Images/background/aboutbg.jpeg";
+import RE5 from "../../assets/Images/background/RE_5.jpeg";
 
 function Services() {
   return (
@@ -20,7 +20,7 @@ function Services() {
 
           <ul className="page-breadcrumb">
             <li>
-              <Link to="/">home</Link>
+              <a href="/">home</a>
             </li>
             <li>Services</li>
           </ul>
@@ -33,35 +33,60 @@ function Services() {
       <section className="services-section style-three">
         <div className="auto-container">
           <div className="sec-title style-two">
-            <h2>Services that we offer</h2>
+           <h2>Professional IT & Electronics Services</h2>
 
             <div className="text">
-              Bring to the table win-win survival strategies to ensure proactive
-              domination. At the end of the day, going forward, a new normal that
-              has evolved from generation X is on the runway heading towards a
-              streamlined cloud solution.
-            </div>
+              At Desu Computer Solution, we provide complete technology solutions,
+              including computer and laptop repair, mobile phone servicing,
+              software installation, networking, CCTV installation, printer
+              maintenance, IT support, and the buying and selling of new and
+              used electronic devices.
+             </div>
           </div>
 
           <div className="row clearfix">
             {[
-              { title: "Performance Upgrade", icon: "flaticon-power" },
-              { title: "Transmission Services", icon: "flaticon-gearbox" },
-              { title: "Break Repair & Service", icon: "flaticon-brake-disc" },
-              { title: "Engine Service & Repair", icon: "flaticon-car-engine" },
-              { title: "Tyre & Wheels", icon: "flaticon-tire" },
-              { title: "Denting & Painting", icon: "flaticon-spray-gun" },
-              { title: "Air Conditioning Evac", icon: "flaticon-air-conditioning" },
-              { title: "General Service & Washing", icon: "flaticon-car-service" },
-            ].map((item, index) => (
+  {
+    title: "Computer & Laptop Repair",
+    icon: "flaticon-computer",
+  },
+  {
+    title: "Mobile Phone Repair",
+    icon: "flaticon-smartphone",
+  },
+  {
+    title: "Software Installation",
+    icon: "flaticon-settings",
+  },
+  {
+    title: "Networking & Wi-Fi Setup",
+    icon: "flaticon-network",
+  },
+  {
+    title: "Printer Repair & Maintenance",
+    icon: "flaticon-printer",
+  },
+  {
+    title: "CCTV Installation",
+    icon: "flaticon-security-camera",
+  },
+  {
+    title: "Buy Used Computers & Phones",
+    icon: "flaticon-shopping-cart",
+  },
+  {
+    title: "Sell New & Used Electronics",
+    icon: "flaticon-online-shop",
+  },
+].map((item, index) => (
               <div className="col-lg-4 service-block-one" key={index}>
                 <div className="inner-box hvr-float-shadow">
-                  <h5>Service and Repairs</h5>
+                  <h5>Technology Solutions</h5>
                   <h2>{item.title}</h2>
 
-                  <Link to="/admin/ServiceDetails" className="read-more">
+                  <a href="/admin/ServiceDetails" className="read-more">
                     read more +
-                  </Link>
+                  </a>
 
                   <div className="icon">
                     <span className={item.icon}></span>
@@ -84,9 +109,9 @@ function Services() {
                       <h2>Why Choose Us</h2>
       
                       <div className="text">
-                        Bring to the table win-win survival strategies.
+                             We are committed to delivering reliable repairs, quality products,
+                             affordable prices, and outstanding customer service.
                       </div>
-      
                     </div>
       
                     <div className="icon-box">
@@ -94,7 +119,7 @@ function Services() {
                         <span className="flaticon-mechanic"></span>
                       </div>
       
-                      <h4>Certified Expert Mechanics</h4>
+                      <h4>Certified IT Technicians</h4>
                     </div>
       
                     <div className="icon-box">
@@ -102,7 +127,7 @@ function Services() {
                         <span className="flaticon-wrench"></span>
                       </div>
       
-                      <h4>Fast And Quality Service</h4>
+                      <h4>Fast, Reliable & Professional Service</h4>
                     </div>
       
                   </div>
@@ -110,7 +135,7 @@ function Services() {
                   <div className="col-lg-6">
       
                     <div className="sec-title style-two">
-                      <h2>Additional Services</h2>
+                      <h2>Our Complete Services</h2>
                     </div>
       
                     <div className="row">
@@ -130,10 +155,20 @@ function Services() {
                       <div className="col-md-7">
       
                         <ul className="list">
-                          <li>General Auto Repair & Maintenance</li>
-                          <li>Transmission Repair & Replacement</li>
-                          <li>Tire Repair and Replacement</li>
-                          <li>Wheel Alignment</li>
+                          <ul className="list">
+                    <li>Desktop Computer Repair</li>
+                    <li>Laptop Repair & Maintenance</li>
+                    <li>Mobile Phone Repair</li>
+                    <li>Printer Installation & Repair</li>
+                    <li>Software Installation & Updates</li>
+                    <li>Virus Removal & Data Recovery</li>
+                    <li>Networking & Wi-Fi Configuration</li>
+                    <li>CCTV Camera Installation</li>
+                    <li>IT Technical Support</li>
+                    <li>Computer Accessories Sales</li>
+                    <li>Buy Used Computers & Mobile Phones</li>
+                    <li>Sell New & Used Computers, Laptops & Mobile Phones</li>
+                        </ul>
                         </ul>
       
                       </div>
@@ -157,11 +192,13 @@ function Services() {
         ></div>
 
         <div className="auto-container">
-          <h5>Working since 1992</h5>
+          <h5>Working since 2020</h5>
 
-          <h2>
-            We are leader <br /> in Car Mechanical Work
-          </h2>
+             <h2>
+                Every Electronics
+              <br />
+               Problem Solved Here
+              </h2>
 
           <div className="video-box">
             <div className="video-btn">
@@ -174,7 +211,7 @@ function Services() {
             </div>
 
             <div className="text">
-              Watch intro video <br /> about us
+              Discover our <br /> technology solutions
             </div>
           </div>
         </div>

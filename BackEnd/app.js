@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ FIXED CORS (allow your frontend)
 app.use(
   cors({
-    origin: "https://garage-management-clone.vercel.app", // your frontend port
+    origin: "http://localhost:4540", // your frontend port
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -31,13 +31,13 @@ app.get("/", (req, res) => {
   res.send("Backend is live 🚀");
 });
 // Port (use different from frontend)
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3020 ;
 const orderRoutes = require("./Routes/order.routes");
 
 app.use("/api/order", orderRoutes);
 
-const vehicleRoutes = require("./Routes/vehicle.routes");
-app.use("/api/vehicle", vehicleRoutes);
+const deviceRoutes = require("./Routes/device.routes");
+app.use("/api/device", deviceRoutes);
 
 
 const serviceRoutes = require("./Routes/service.routes");

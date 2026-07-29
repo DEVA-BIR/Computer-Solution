@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../../assets/Template-asset/images/loggo.jpg';
+import Logo from '../../../assets/Template-asset/images/DESU_Last.jpeg'; // Adjust the path to your logo image   
 import { useAuth } from '../../../Context/AuthContxt.jsx';
 import loginService from '../../../Services/login.service.jsx';
 
@@ -9,7 +9,9 @@ function Header() {
   const { isLogged, setIsLogged, employee } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const isAdminOrManager = employee?.employee_role === 3;
+  const isAdmin = employee?.employee_role === 3;
+  const isManager = employee?.employee_role === 2;
+  const isEmployee = employee?.employee_role === 1;
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -33,8 +35,8 @@ function Header() {
           <div className="auto-container">
             <div className="inner-container">
               <div className="left-column">
-                <div className="text">#Your Journey Starts with a Healthy Vehicle.</div>
-                <div className="office-hour">Monday - Saturday 7:00AM - 6:00PM</div>
+                <div className="text">#Smart Repairs. Smart Solutions.</div>
+                <div className="office-hour">Sunday - Sunday 24 hrs</div>
               </div>
              <div className={`right-column ${isMobileMenuOpen ? "menu-open" : ""}`}>
                 {isLogged ? (
@@ -45,7 +47,7 @@ function Header() {
                   </div>
                 ) : (
                   <div className="phone-number">
-                    Schedule Appointment: <strong>+251911000000</strong>
+                    Schedule Appointment: <strong>+251940066308</strong>
                   </div>
                 )}
               </div>
@@ -88,10 +90,24 @@ function Header() {
 
     <li><Link to="/contact" onClick={closeMobileMenu}>Contact</Link></li>
 
-    {isAdminOrManager && (
+    {isAdmin && (
         <li>
             <Link to="/admin" onClick={closeMobileMenu}>
                 Admin
+            </Link>
+        </li>
+    )}
+     {isManager && (
+        <li>
+            <Link to="/managerial" onClick={closeMobileMenu}>
+                Manager
+            </Link>
+        </li>
+    )}
+     {isEmployee && (
+        <li>
+            <Link to="/employeer" onClick={closeMobileMenu}>
+                Employee
             </Link>
         </li>
     )}

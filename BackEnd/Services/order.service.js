@@ -25,14 +25,14 @@ async function createOrder(orderData) {
       throw new Error("Customer ID does not exist");
     }
 
-    // Validate Vehicle
-    const vehicle = await conn.query(
-      "SELECT vehicle_id FROM customer_vehicle_info WHERE vehicle_id = ?",
-      [orderData.vehicle_id]
+    // Validate device
+    const device = await conn.query(
+      "SELECT device_id FROM customer_device_info WHERE device_id = ?",
+      [orderData.device_id]
     );
 
-    if (!vehicle || vehicle.length === 0) {
-      throw new Error("Vehicle ID does not exist");
+    if (!device || device.length === 0) {
+      throw new Error("device ID does not exist");
     }
 
     // Validate Services
@@ -59,7 +59,7 @@ async function createOrder(orderData) {
       INSERT INTO orders (
         employee_id,
         customer_id,
-        vehicle_id,
+        device_id,
         active_order,
         order_hash
       )
@@ -69,7 +69,7 @@ async function createOrder(orderData) {
     const orderResult = await conn.query(orderQuery, [
       orderData.employee_id,
       orderData.customer_id,
-      orderData.vehicle_id,
+      orderData.device_id,
       orderData.active_order,
       orderHash,
     ]);
@@ -151,46 +151,62 @@ async function createOrder(orderData) {
 }
 
 // GET ALL ORDERS
+// GET ALL ORDERS
 async function getAllOrders() {
   try {
     const query = `
-     SELECT 
-  o.order_id,
-  o.order_date,
-  o.active_order,
+    SELECT 
+      o.order_id,
+      o.order_date,
+      o.active_order,
 
-  c.customer_first_name,
-  c.customer_last_name,
+      ei.employee_first_name,
+      ei.employee_last_name,
 
-  v.vehicle_make,
-  v.vehicle_model,
-  v.vehicle_year,
+      c.customer_first_name,
+      c.customer_last_name,
 
-  oi.order_total_price,
-  oi.estimated_completion_date,
+      ci.customer_email,
+      ci.customer_phone_number,
 
-  os.order_status
+      v.device_make,
+      v.device_model,
+      v.device_year,
+      v.device_brand,
 
-FROM orders o
+      oi.order_total_price,
+      oi.estimated_completion_date,
 
-JOIN customer_identifier ci 
-  ON o.customer_id = ci.customer_id
+      os.order_status
 
-JOIN customer_info c 
-  ON ci.customer_id = c.customer_id
+    FROM orders o
 
-JOIN customer_vehicle_info v 
-  ON o.vehicle_id = v.vehicle_id
+    JOIN employee e
+      ON o.employee_id = e.employee_id
 
-JOIN order_info oi 
-  ON o.order_id = oi.order_id
+    JOIN employee_info ei
+      ON e.employee_id = ei.employee_id
 
-JOIN order_status os 
-  ON o.order_id = os.order_id
+    JOIN customer_identifier ci 
+      ON o.customer_id = ci.customer_id
 
-ORDER BY o.order_id DESC;
+    JOIN customer_info c 
+      ON ci.customer_id = c.customer_id
+
+    JOIN customer_device_info v 
+      ON o.device_id = v.device_id
+
+    JOIN order_info oi 
+      ON o.order_id = oi.order_id
+
+    JOIN order_status os 
+      ON o.order_id = os.order_id
+
+    ORDER BY o.order_id DESC;
     `;
+
     const rows = await conn.query(query);
+
     return rows;
 
   } catch (error) {
@@ -208,7 +224,7 @@ async function getSingleOrder(orderId) {
         o.order_id,
         o.employee_id,
         o.customer_id,
-        o.vehicle_id,
+        o.device_id,
         o.active_order,
         o.order_date,
 
@@ -251,9 +267,9 @@ async function getSingleOrder(orderId) {
 async function updateOrder(orderId, data) {
   try {
 
-    // GET VEHICLE ID OF CURRENT ORDER ONLY
+    // GET device ID OF CURRENT ORDER ONLY
     const orderRows = await conn.query(
-  `SELECT vehicle_id FROM orders WHERE order_id = ?`,
+  `SELECT device_id FROM orders WHERE order_id = ?`,
   [orderId]
 );
 
@@ -261,22 +277,22 @@ if (!orderRows || orderRows.length === 0) {
   throw new Error("Order not found");
 }
 
-const vehicleId = orderRows[0].vehicle_id;
+const deviceId = orderRows[0].device_id;
 
-    // UPDATE VEHICLE
+    // UPDATE device
     await conn.query(
-      `UPDATE customer_vehicle_info
-       SET vehicle_make = ?,
-           vehicle_model = ?,
-           vehicle_year = ?,
-           vehicle_tag = ?
-       WHERE vehicle_id = ?`,
+      `UPDATE customer_device_info
+       SET device_make = ?,
+           device_model = ?,
+           device_year = ?,
+           device_brand = ?
+       WHERE device_id = ?`,
       [
-        data.vehicle_make,
-        data.vehicle_model,
-        data.vehicle_year,
-        data.vehicle_tag,
-        vehicleId,
+        data.device_make,
+        data.device_model,
+        data.device_year,
+        data.device_brand,
+        deviceId,
       ]
     );
 

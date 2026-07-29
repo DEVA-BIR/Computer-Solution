@@ -19,18 +19,18 @@ CREATE TABLE IF NOT EXISTS `customer_info` (
   FOREIGN KEY (customer_id) REFERENCES customer_identifier(customer_id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS `customer_vehicle_info` (
-  `vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(11) NOT NULL, 
-  `vehicle_year` int(11) NOT NULL,
-  `vehicle_make` varchar(255) NOT NULL,
-  `vehicle_model` varchar(255) NOT NULL,
-  `vehicle_type` varchar(255) NOT NULL,
-  `vehicle_mileage` int(11) NOT NULL, 
-  `vehicle_tag` varchar(255) NOT NULL,
-  `vehicle_serial` varchar(255) NOT NULL,
-  `vehicle_color` varchar(255) NOT NULL,
-  PRIMARY KEY (vehicle_id),
+CREATE TABLE IF NOT EXISTS `customer_device_info` (
+  `device_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `device_year` int(11) NOT NULL,
+  `device_make` varchar(255) NOT NULL,
+  `device_model` varchar(255) NOT NULL,
+  `device_type` varchar(255) NOT NULL,
+  `device_accessories_received` varchar(255) NOT NULL,
+  `device_brand` varchar(255) NOT NULL,
+  `device_serial` varchar(255) NOT NULL,
+  `device_problem` varchar(255) NOT NULL,
+  PRIMARY KEY (device_id),
   FOREIGN KEY (customer_id) REFERENCES customer_identifier(customer_id)
 ) ENGINE=InnoDB;
 
@@ -99,14 +99,14 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `vehicle_id` int(11) NOT NULL,
+  `device_id` int(11) NOT NULL,
   `order_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `active_order` int(11) NOT NULL,
   `order_hash` varchar(255) NOT NULL,
   PRIMARY KEY (order_id),
   FOREIGN KEY (employee_id) REFERENCES employee(employee_id), 
   FOREIGN KEY (customer_id) REFERENCES customer_identifier(customer_id),
-  FOREIGN KEY (vehicle_id) REFERENCES customer_vehicle_info(vehicle_id)
+  FOREIGN KEY (device_id) REFERENCES customer_device_info(device_id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `order_info` (

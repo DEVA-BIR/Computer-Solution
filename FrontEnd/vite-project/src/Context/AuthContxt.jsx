@@ -12,6 +12,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isManager, setIsManager] = useState(false);
+  const [isEmployee, setIsEmployee] = useState(false);
   const [employee, setEmployee] = useState(null);
   const [customer, setCustomer] = useState(null);
 const logout = () => {
@@ -25,6 +27,8 @@ const logout = () => {
   const value = {
   isLogged,
   isAdmin,
+  isManager,
+  isEmployee,
   setIsAdmin,
   setIsLogged,
   employee,
@@ -39,13 +43,22 @@ const logout = () => {
     loggedInEmployee.then((response) => {
       // console.log(response);
       if (response.employee_token) {
-        setIsLogged(true);
-        // 3 is the employee_role for admin
-        if (response.employee_role === 3) {
-          setIsAdmin(true);
-        }
-        setEmployee(response);
-      }
+    setIsLogged(true);
+
+    if (response.employee_role === 3) {
+        setIsAdmin(true);
+    }
+
+    if (response.employee_role === 2) {
+        setIsManager(true);
+    }
+
+    if (response.employee_role === 1) {
+        setIsEmployee(true);
+    }
+
+    setEmployee(response);
+}
     });
   }, []);
   useEffect(() => {

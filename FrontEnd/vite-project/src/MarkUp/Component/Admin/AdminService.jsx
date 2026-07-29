@@ -7,12 +7,12 @@ import AdminServices from '../AdminServices';
 
    function AdminService() {
   // Destructure the auth hook 
-  const { isLogged, isAdmin } = useAuth();
+  const { isLogged, isAdmin, isManager } = useAuth();
 
   if (isLogged) {
 
 
-    if (isAdmin) {
+    if (isAdmin || isManager) {
       return (
         <div>
           <div className="container-fluid admin-pages">

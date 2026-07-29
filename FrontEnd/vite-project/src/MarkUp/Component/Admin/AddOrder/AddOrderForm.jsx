@@ -9,7 +9,7 @@ function AddOrder() {
   const [formData, setFormData] = useState({
     employee_id: "",
     customer_id: "",
-    vehicle_id: "",
+    device_id: "",
 
     active_order: 1,
 
@@ -100,7 +100,7 @@ const handleSubmit = async (e) => {
       setFormData({
         employee_id: "",
         customer_id: "",
-        vehicle_id: "",
+        device_id: "",
         services: [],
       });
          navigate("/");
@@ -160,11 +160,11 @@ const handleSubmit = async (e) => {
         </div>
 
         <div className="mb-3">
-          <label>Vehicle ID</label>
+          <label>device ID</label>
 
           <input
             type="number"
-            name="vehicle_id"
+            name="device_id"
             className="form-control"
             onChange={handleChange}
           />

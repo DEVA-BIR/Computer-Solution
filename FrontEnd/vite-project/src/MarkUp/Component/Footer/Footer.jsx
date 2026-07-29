@@ -16,7 +16,7 @@ function Footer() {
                                 <div className="icon">
                                     <span className="flaticon-pin"></span>
                                 </div>
-                                <div className="text">Addis Ababa<br></br> Bole, Ethiopia</div>
+                                <div className="text">Ambo<br></br> Oromia, Ethiopia</div>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,9 @@ function Footer() {
                     
                         <div className="footer-column col-lg-4">
                             <div className="widget widget_about">
-                                <div className="text">Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide additional clickthroughs.</div>
+                                <div className="text">
+       We specialize in computer and mobile device repair, sales of new and used electronics, software installation, data recovery, and technical support. Our experienced technicians are dedicated to providing dependable solutions that keep your technology running smoothly.
+</div>
                             </div>
                         </div>
                         
@@ -84,11 +86,12 @@ function Footer() {
                                         <h4 className="widget_title">Our Services</h4>
                                         <div className="widget-content">
                                             <ul className="list">
-                                                <li><a href="#">Performance Upgrade</a></li>
-                                                <li><a href="#">Transmission Service</a></li>
-                                                <li><a href="#">Break Repair & Service</a></li>
-                                                <li><a href="#">Engine Service & Repair</a></li>
-                                                <li><a href="#">Trye & Wheels</a></li>
+                                                <li><a href="#">Computer & Laptop Repair</a></li>
+                                                <li><a href="#">Mobile Phone Repair</a></li>
+                                                <li><a href="#">CCTV Installation</a></li>
+                                                <li><a href="#">IT Technical Support</a></li>
+                                                <li><a href="#">Buy Used Computers & Phones</a></li>
+                                                <li><a href="#">Sell New & Used Electronics</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -115,6 +118,8 @@ function Footer() {
                                     <li><a href="#"><span className="fab fa-linkedin-in"></span></a></li>
                                     <li><a href="#"><span className="fab fa-youtube"></span></a></li>
                                     <li><a href="#"><span className="fab fa-instagram"></span></a></li>
+                                    <li><a href="#"><span className="fab fa-tiktok"></span></a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
