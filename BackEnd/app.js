@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ FIXED CORS (allow your frontend)
 app.use(
   cors({
-    origin: "http://localhost:4540", // your frontend port
+    origin: "https://computer-solution-psi-self.vercel.app", // your frontend port
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
