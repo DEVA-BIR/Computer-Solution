@@ -3,7 +3,7 @@ import { useAuth } from '../../Context/AuthContxt';
 import AdminMenu from "./Admin/AdminMenu";
 import LoginForm from './LoginForm/LoginForm';
 import AdminDashBoard from './AdminDashBoard';
-import Adddevice from './Admin/Adddevice/Adddevice'; 
+import Adddevice from './Admin/AddDevice/AddDevice'; 
 
 
    function deviceInfo() {
