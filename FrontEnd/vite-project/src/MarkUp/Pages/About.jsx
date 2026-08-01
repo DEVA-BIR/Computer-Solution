@@ -32,9 +32,6 @@ function About() {
           </ul>
         </div>
 
-        <h1 data-parallax='{"x": 200}'>
-          Desu Computer 
-        </h1>
       </section>
 
       {/* About Section Three */}
