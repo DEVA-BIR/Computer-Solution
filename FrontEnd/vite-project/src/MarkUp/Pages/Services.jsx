@@ -56,7 +56,7 @@ function Services() {
   },
   {
     title: "Software Installation",
-    icon: "flaticon-settings",
+    icon: "flaticon-mobile",
   },
   {
     title: "Networking & Wi-Fi Setup",
