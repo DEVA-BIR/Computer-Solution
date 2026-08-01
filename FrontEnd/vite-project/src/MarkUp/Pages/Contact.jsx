@@ -29,11 +29,6 @@ function Contact() {
 
         </div>
 
-        <h1 data-parallax='{"x": 900}'>
-          Desu Computer
-        </h1>
-      </section>
-
       {/* Contact Section */}
       <section className="contact-section">
 
