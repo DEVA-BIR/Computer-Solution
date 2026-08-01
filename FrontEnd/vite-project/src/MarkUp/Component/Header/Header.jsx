@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../../assets/Template-asset/images/DESU_Last.jpeg'; // Adjust the path to your logo image   
+import Logo from '../../../assets/Template-asset/images/desu logo.png'; // Adjust the path to your logo image   
 import { useAuth } from '../../../Context/AuthContxt.jsx';
 import loginService from '../../../Services/login.service.jsx';
 
