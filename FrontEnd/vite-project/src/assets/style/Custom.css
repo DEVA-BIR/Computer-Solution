@@ -1569,7 +1569,7 @@ img{
         top:100%;
         left:0;
         width:100%;
-        background:#fff;
+        background:#000;
         box-shadow:0 10px 25px rgba(0,0,0,.12);
         z-index:9999;
         animation:slideDown .3s ease;
