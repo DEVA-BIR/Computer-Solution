@@ -29,6 +29,9 @@ function Contact() {
 
         </div>
 
+
+      </section>
+
       {/* Contact Section */}
       <section className="contact-section">
 
