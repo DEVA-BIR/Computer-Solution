@@ -55,8 +55,8 @@ const AdminDashboardBody = () => {
       icon:<FaClipboardList />,
     },
     {
-      small: "ADMIN SERVICES",
-      title: "Admin Services",
+      small: "SERVICES",
+      title: "Services",
       link: "Admin Services",
       path: "/admin/AdminService",
       icon: <FaTools />,
