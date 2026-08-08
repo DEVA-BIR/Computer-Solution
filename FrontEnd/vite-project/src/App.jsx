@@ -21,6 +21,7 @@ import Employeer from './MarkUp/Component/Employeer'
 import AdminService from './MarkUp/Component/Admin/AdminService'
 import ServiceDetails from './MarkUp/Component/Admin/Servicesdetails'
 import OrderEdit from './MarkUp/EditPage/OrderEdit'
+import DeviceEdit from './MarkUp/EditPage/DeviceEdit'
 import CustomerEdit from './MarkUp/EditPage/CustomerEdit' 
 import EmployeeEdit from './MarkUp/EditPage/EmployeeEdit'
 
@@ -101,6 +102,12 @@ return (
           element={
             <PrivateAuthRoute roles={[1,2]}>
               <OrderEdit />
+            </PrivateAuthRoute>
+          } />
+          <Route path="/admin/DeviceInfo/edit/:id"
+          element={
+            <PrivateAuthRoute roles={[1,2,3]}>
+              <DeviceEdit />
             </PrivateAuthRoute>
           } />
           <Route path="/admin/customer/edit/:id"
