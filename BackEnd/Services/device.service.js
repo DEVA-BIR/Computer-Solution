@@ -1,6 +1,9 @@
 const conn = require("../Config/dbconfig");
 
 // CREATE device
+const conn = require("../Config/dbconfig");
+
+// CREATE device
 async function createdevice(deviceData) {
   try {
     const {
@@ -29,7 +32,7 @@ async function createdevice(deviceData) {
       throw new Error("Type is required");
 
     if (!device_accessories_received)
-      throw new Error("accessorie is required");
+      throw new Error("Accessorie is required");
 
     if (!device_brand)
       throw new Error("Brand is required");
@@ -61,25 +64,36 @@ async function createdevice(deviceData) {
     );
 
     if (brandExists.length > 0) {
-      throw new Error("brand already exists");
+      throw new Error("Brand already exists");
     }
 
+    // Generate next device ID
+    const idResult = await conn.query(
+      `SELECT COALESCE(MAX(device_id), 0) + 1 AS nextDeviceId
+       FROM customer_device_info`
+    );
+
+    const device_id = idResult[0].nextDeviceId;
+
+    // Insert device
     const query = `
       INSERT INTO customer_device_info (
+        device_id,
         customer_id,
         device_year,
         device_make,
         device_model,
         device_type,
         device_accessories_received,
-       device_brand,
+        device_brand,
         device_serial,
         device_problem
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     return await conn.query(query, [
+      device_id,
       customer_id,
       device_year,
       device_make,
@@ -92,6 +106,7 @@ async function createdevice(deviceData) {
     ]);
 
   } catch (error) {
+    console.log("Create Device Service Error:", error);
     throw error;
   }
 }
