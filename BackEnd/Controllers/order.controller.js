@@ -82,17 +82,20 @@ async function updateOrder(req, res) {
     const orderId = req.params.id;
 
     const body = req.body;
-
-    const cleanData = {
-      order_status: body.order_status ?? null,
-     device_make: body.vehicle_make ?? null,
-     device_model: body.vehicle_model ?? null,
-     device_year:
-        body.vehicle_year === "" || body.vehicle_year == null
-          ? null
-          : Number(body.vehicle_year),
-     device_tag: body.vehicle_tag ?? null,
-    };
+const cleanData = {
+  employee_id: body.employee_id,
+  customer_id: body.customer_id,
+  device_id: body.device_id,
+  order_total_price: body.order_total_price,
+  estimated_completion_date: body.estimated_completion_date,
+  completion_date: body.completion_date,
+  additional_request: body.additional_request,
+  notes_for_internal_use: body.notes_for_internal_use,
+  notes_for_customer: body.notes_for_customer,
+  order_status: body.order_status,
+  services: body.services,
+};
+   
 
     await orderService.updateOrder(orderId, cleanData);
 
