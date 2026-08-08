@@ -20,20 +20,25 @@ async function checkIfCustomerExists(email) {
 // CREATE CUSTOMER
 // =====================================================
 async function createCustomer(customer) {
-
   try {
 
-    // Generate next customer ID manually
-    const idResult = await conn.query(`
+    // ==========================================
+    // 1. GENERATE CUSTOMER ID
+    // ==========================================
+
+    const customerIdResult = await conn.query(`
       SELECT COALESCE(MAX(customer_id), 0) + 1 AS nextCustomerId
       FROM customer_identifier
     `);
 
-    const customer_id = idResult[0].nextCustomerId;
+    const customer_id =
+      customerIdResult[0].nextCustomerId;
 
-    // =================================================
-    // 1. INSERT CUSTOMER IDENTIFIER
-    // =================================================
+
+    // ==========================================
+    // 2. INSERT CUSTOMER IDENTIFIER
+    // ==========================================
+
     await conn.query(
       `
       INSERT INTO customer_identifier (
@@ -48,30 +53,48 @@ async function createCustomer(customer) {
         customer_id,
         customer.customer_email,
         customer.customer_phone,
-        "default_hash",
+        "default_hash"
       ]
     );
 
-    // =================================================
-    // 2. INSERT CUSTOMER INFO
-    // =================================================
+
+    // ==========================================
+    // 3. GENERATE CUSTOMER INFO ID
+    // ==========================================
+
+    const infoIdResult = await conn.query(`
+      SELECT COALESCE(MAX(customer_info_id), 0) + 1 AS nextCustomerInfoId
+      FROM customer_info
+    `);
+
+    const customer_info_id =
+      infoIdResult[0].nextCustomerInfoId;
+
+
+    // ==========================================
+    // 4. INSERT CUSTOMER INFO
+    // ==========================================
+
     await conn.query(
       `
       INSERT INTO customer_info (
+        customer_info_id,
         customer_id,
         customer_first_name,
         customer_last_name,
         active_customer_status
       )
-      VALUES (?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?)
       `,
       [
+        customer_info_id,
         customer_id,
         customer.customer_first_name,
         customer.customer_last_name,
-        1,
+        1
       ]
     );
+
 
     return customer_id;
 
@@ -82,7 +105,6 @@ async function createCustomer(customer) {
     throw error;
   }
 }
-
 // =====================================================
 // GET CUSTOMER BY EMAIL
 // =====================================================
