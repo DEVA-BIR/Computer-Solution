@@ -1019,6 +1019,14 @@ background: #dcfce7;
   border-radius: 5px;
   cursor: pointer;
 }
+.delet-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 .delete-btn:hover {
   background: #c82333;
