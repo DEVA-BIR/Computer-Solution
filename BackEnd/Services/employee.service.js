@@ -21,7 +21,13 @@ async function checkIfEmployeeExists(email) {
 // =====================================================
 async function createEmployee(employee) {
   try {
-    // Generate next employee ID manually
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(
+      employee.employee_password,
+      salt
+    );
+
+    // Generate employee_id manually
     const idResult = await conn.query(`
       SELECT COALESCE(MAX(employee_id), 0) + 1 AS nextEmployeeId
       FROM employee
@@ -29,38 +35,24 @@ async function createEmployee(employee) {
 
     const employee_id = idResult[0].nextEmployeeId;
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(
-      employee.employee_password,
-      salt
-    );
-
-    // =================================================
     // 1. INSERT EMPLOYEE
-    // =================================================
-    const employeeQuery = `
+    await conn.query(
+      `
       INSERT INTO employee (
         employee_id,
         employee_email,
         active_employee
       )
       VALUES (?, ?, ?)
-    `;
+      `,
+      [
+        employee_id,
+        employee.employee_email,
+        employee.active_employee
+      ]
+    );
 
-    const result = await conn.query(employeeQuery, [
-      employee_id,
-      employee.employee_email,
-      employee.active_employee ?? 1,
-    ]);
-
-    if (result.affectedRows !== 1) {
-      return false;
-    }
-
-    // =================================================
     // 2. INSERT EMPLOYEE INFO
-    // =================================================
     await conn.query(
       `
       INSERT INTO employee_info (
@@ -75,13 +67,11 @@ async function createEmployee(employee) {
         employee_id,
         employee.employee_first_name,
         employee.employee_last_name,
-        employee.employee_phone,
+        employee.employee_phone
       ]
     );
 
-    // =================================================
     // 3. INSERT PASSWORD
-    // =================================================
     await conn.query(
       `
       INSERT INTO employee_pass (
@@ -90,12 +80,13 @@ async function createEmployee(employee) {
       )
       VALUES (?, ?)
       `,
-      [employee_id, hashedPassword]
+      [
+        employee_id,
+        hashedPassword
+      ]
     );
 
-    // =================================================
     // 4. INSERT ROLE
-    // =================================================
     await conn.query(
       `
       INSERT INTO employee_role (
@@ -106,12 +97,12 @@ async function createEmployee(employee) {
       `,
       [
         employee_id,
-        employee.company_role_id ?? 3,
+        employee.company_role_id || 3
       ]
     );
 
     return {
-      employee_id,
+      employee_id
     };
 
   } catch (error) {
@@ -119,7 +110,6 @@ async function createEmployee(employee) {
     throw error;
   }
 }
-
 // =====================================================
 // GET EMPLOYEE BY EMAIL
 // =====================================================
