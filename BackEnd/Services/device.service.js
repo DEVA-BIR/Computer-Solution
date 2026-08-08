@@ -139,8 +139,105 @@ async function deletedevice(deviceId) {
     throw error;
   }
 }
+async function getSingleDevice(deviceId) {
+
+  const query = `
+      SELECT *
+      FROM customer_device_info
+      WHERE device_id = ?
+  `;
+
+  const rows = await conn.query(query, [deviceId]);
+
+  if (!rows || rows.length === 0) {
+    return null;
+  }
+
+  return rows[0];
+
+}
+async function updateDevice(deviceId, data) {
+
+  // Get current record
+  const current = await getSingleDevice(deviceId);
+
+  if (!current) {
+    throw new Error("Device not found");
+  }
+
+  const updated = {
+
+    device_year:
+      data.device_year ?? current.device_year,
+
+    device_make:
+      data.device_make ?? current.device_make,
+
+    device_model:
+      data.device_model ?? current.device_model,
+
+    device_type:
+      data.device_type ?? current.device_type,
+
+    device_accessories_received:
+      data.device_accessories_received ??
+      current.device_accessories_received,
+
+    device_brand:
+      data.device_brand ?? current.device_brand,
+
+    device_serial:
+      data.device_serial ?? current.device_serial,
+
+    device_problem:
+      data.device_problem ?? current.device_problem,
+
+  };
+
+  const query = `
+      UPDATE customer_device_info
+
+      SET
+
+      device_year=?,
+      device_make=?,
+      device_model=?,
+      device_type=?,
+      device_accessories_received=?,
+      device_brand=?,
+      device_serial=?,
+      device_problem=?
+
+      WHERE device_id=?
+  `;
+
+  return await conn.query(query, [
+
+    updated.device_year,
+
+    updated.device_make,
+
+    updated.device_model,
+
+    updated.device_type,
+
+    updated.device_accessories_received,
+
+    updated.device_brand,
+
+    updated.device_serial,
+
+    updated.device_problem,
+
+    deviceId
+
+  ]);
+
+}
 module.exports = {
   createdevice,
   getdevicesByCustomer,
   deletedevice,
+  getSingleDevice,
+  updateDevice
 };
