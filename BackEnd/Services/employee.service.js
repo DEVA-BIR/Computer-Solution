@@ -22,35 +22,29 @@ async function checkIfEmployeeExists(email) {
 async function createEmployee(employee) {
   try {
     const salt = await bcrypt.genSalt(10);
+
     const hashedPassword = await bcrypt.hash(
       employee.employee_password,
       salt
     );
 
-    // Generate employee_id manually
-    const idResult = await conn.query(`
-      SELECT COALESCE(MAX(employee_id), 0) + 1 AS nextEmployeeId
-      FROM employee
-    `);
-
-    const employee_id = idResult[0].nextEmployeeId;
-
     // 1. INSERT EMPLOYEE
-    await conn.query(
+    const employeeResult = await conn.query(
       `
       INSERT INTO employee (
-        employee_id,
         employee_email,
         active_employee
       )
-      VALUES (?, ?, ?)
+      VALUES (?, ?)
       `,
       [
-        employee_id,
         employee.employee_email,
         employee.active_employee
       ]
     );
+
+    // Get the AUTO_INCREMENT employee_id
+    const employee_id = employeeResult.insertId;
 
     // 2. INSERT EMPLOYEE INFO
     await conn.query(
