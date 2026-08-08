@@ -1,7 +1,7 @@
 const conn = require("../Config/dbconfig");
 
-// CREATE device
-const conn = require("../Config/dbconfig");
+
+
 
 // CREATE device
 async function createdevice(deviceData) {
