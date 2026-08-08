@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import deviceService from "../../../../Services/device.service";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
 const AddDevice = () => {
   const location = useLocation();
@@ -15,7 +15,7 @@ const AddDevice = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [fieldError, setFieldError] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (selectedCustomer) {
       setCustomer({
@@ -214,7 +214,7 @@ const handleDeletedevice = async (deviceId) => {
       </div>
 
       <div className="section-row">
-        <div className="circle-box">Cars</div>
+        <div className="circle-box">Devices</div>
 
         <div className="section-content">
           <h2>devices of {customer.name.split(" ")[0]}</h2>
@@ -224,26 +224,40 @@ const handleDeletedevice = async (deviceId) => {
               <p>No device found</p>
             ) : (
               Array.isArray(devices) &&
-              devices.map((car, index) => (
-                <div className="device-card" key={index}>
+              devices.map((Device, index) => (
+                <div className="device-Deviced" key={index}>
   <h3>
-    {car.device_year || car.year}{" "}
-    {car.device_make || car.make}{" "}
-    {car.device_model || car.model}
+    {Device.device_year || Device.year}{" "}
+    {Device.device_make || Device.make}{" "}
+    {Device.device_model || Device.model}
   </h3>
-  <p><strong>Type:</strong> {car.device_type || car.type}</p>
-  <p><strong>accessories_received:</strong> {car.device_accessories_received || car.accessories_received}</p>
-  <p><strong>brand:</strong> {car.device_brand || car.brand}</p>
-  <p><strong>Serial:</strong> {car.device_serial || car.serial}</p>
-  <p><strong>problem:</strong> {car.device_problem || car.problem}</p>
+  <p><strong>Type:</strong> {Device.device_type || Device.type}</p>
+  <p><strong>accessories_received:</strong> {Device.device_accessories_received || Device.accessories_received}</p>
+  <p><strong>brand:</strong> {Device.device_brand || Device.brand}</p>
+  <p><strong>Serial:</strong> {Device.device_serial || Device.serial}</p>
+  <p><strong>problem:</strong> {Device.device_problem || Device.problem}</p>
 
   <button
     type="button"
     className="delete-btn"
-    onClick={() => handleDeletedevice(car.device_id)}
+    onClick={() => handleDeletedevice(Device.device_id)}
   >
     Delete device
   </button>
+  <button
+  type="button"
+  className="delet-btn"
+  onClick={() =>
+    navigate(
+      `/admin/DeviceInfo/edit/${Device.device_id}`,
+      {
+        state: Device
+      }
+    )
+  }
+>
+  Edit Device
+</button>
 </div>
               ))
             )}
