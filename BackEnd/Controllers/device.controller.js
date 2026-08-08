@@ -87,8 +87,70 @@ async function deletedevice(req, res) {
     });
   }
 }
+// GET SINGLE DEVICE
+async function getSingleDevice(req, res) {
+
+  try {
+
+    const device = await deviceService.getSingleDevice(req.params.id);
+
+    if (!device) {
+      return res.status(404).json({
+        success: false,
+        message: "Device not found"
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: device
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+}
+
+
+// UPDATE DEVICE
+async function updateDevice(req, res) {
+
+  try {
+
+    await deviceService.updateDevice(
+      req.params.id,
+      req.body
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Device updated successfully"
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+}
 module.exports = {
   createdevice,
   getdevicesByCustomer,
   deletedevice,
+  getSingleDevice,
+  updateDevice
 };
