@@ -1,3 +1,4 @@
+```javascript
 const conn = require("../Config/dbconfig");
 const crypto = require("crypto");
 
@@ -5,13 +6,10 @@ const crypto = require("crypto");
 // CREATE ORDER
 // =====================================================
 async function createOrder(orderData) {
-
   try {
-
     // =================================================
     // VALIDATE EMPLOYEE
     // =================================================
-
     const employee = await conn.query(
       `
       SELECT employee_id
@@ -28,7 +26,6 @@ async function createOrder(orderData) {
     // =================================================
     // VALIDATE CUSTOMER
     // =================================================
-
     const customer = await conn.query(
       `
       SELECT customer_id
@@ -45,7 +42,6 @@ async function createOrder(orderData) {
     // =================================================
     // VALIDATE DEVICE
     // =================================================
-
     const device = await conn.query(
       `
       SELECT device_id
@@ -62,14 +58,11 @@ async function createOrder(orderData) {
     // =================================================
     // VALIDATE SERVICES
     // =================================================
-
     if (
       Array.isArray(orderData.services) &&
       orderData.services.length > 0
     ) {
-
       for (const service of orderData.services) {
-
         const serviceExists = await conn.query(
           `
           SELECT service_id
@@ -80,7 +73,6 @@ async function createOrder(orderData) {
         );
 
         if (!serviceExists || serviceExists.length === 0) {
-
           throw new Error(
             `Service ID ${service.service_id} does not exist`
           );
@@ -91,26 +83,25 @@ async function createOrder(orderData) {
     // =================================================
     // GENERATE ORDER ID
     // =================================================
-
-    const idResult = await conn.query(`
+    const idResult = await conn.query(
+      `
       SELECT COALESCE(MAX(order_id), 0) + 1 AS nextOrderId
       FROM orders
-    `);
+      `
+    );
 
-    const order_id = idResult[0].nextOrderId;
+    const order_id = Number(idResult[0].nextOrderId);
 
     // =================================================
-    // GENERATE HASH
+    // GENERATE ORDER HASH
     // =================================================
-
     const orderHash = crypto
       .randomBytes(16)
       .toString("hex");
 
     // =================================================
-    // 1. INSERT ORDERS
+    // INSERT INTO ORDERS
     // =================================================
-
     const orderQuery = `
       INSERT INTO orders (
         order_id,
@@ -123,25 +114,25 @@ async function createOrder(orderData) {
       VALUES (?, ?, ?, ?, ?, ?)
     `;
 
-    await conn.query(orderQuery, [
+    const orderResult = await conn.query(
+      orderQuery,
+      [
+        order_id,
+        orderData.employee_id,
+        orderData.customer_id,
+        orderData.device_id,
+        orderData.active_order ?? 1,
+        orderHash,
+      ]
+    );
 
-      order_id,
-
-      orderData.employee_id,
-
-      orderData.customer_id,
-
-      orderData.device_id,
-
-      orderData.active_order ?? 1,
-
-      orderHash,
-    ]);
+    if (orderResult.affectedRows !== 1) {
+      throw new Error("Failed to create order");
+    }
 
     // =================================================
-    // 2. INSERT ORDER INFO
+    // INSERT INTO ORDER INFO
     // =================================================
-
     const orderInfoQuery = `
       INSERT INTO order_info (
         order_id,
@@ -156,36 +147,28 @@ async function createOrder(orderData) {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    await conn.query(orderInfoQuery, [
-
-      order_id,
-
-      orderData.order_total_price ?? 0,
-
-      orderData.estimated_completion_date,
-
-      orderData.completion_date || null,
-
-      orderData.additional_request || "",
-
-      orderData.notes_for_internal_use || "",
-
-      orderData.notes_for_customer || "",
-
-      orderData.additional_requests_completed ?? 0,
-    ]);
+    await conn.query(
+      orderInfoQuery,
+      [
+        order_id,
+        orderData.order_total_price ?? 0,
+        orderData.estimated_completion_date || null,
+        orderData.completion_date || null,
+        orderData.additional_request || "",
+        orderData.notes_for_internal_use || "",
+        orderData.notes_for_customer || "",
+        orderData.additional_requests_completed ?? 0,
+      ]
+    );
 
     // =================================================
-    // 3. INSERT ORDER SERVICES
+    // INSERT INTO ORDER SERVICES
     // =================================================
-
     if (
       Array.isArray(orderData.services) &&
       orderData.services.length > 0
     ) {
-
       for (const service of orderData.services) {
-
         await conn.query(
           `
           INSERT INTO order_services (
@@ -205,9 +188,8 @@ async function createOrder(orderData) {
     }
 
     // =================================================
-    // 4. INSERT ORDER STATUS
+    // INSERT INTO ORDER STATUS
     // =================================================
-
     await conn.query(
       `
       INSERT INTO order_status (
@@ -224,40 +206,35 @@ async function createOrder(orderData) {
 
     return {
       success: true,
-      order_id,
+      order_id: order_id,
       order_hash: orderHash,
     };
 
   } catch (error) {
-
-    console.log("DATABASE QUERY ERROR:");
-    console.log(error);
-
+    console.log("CREATE ORDER ERROR:", error);
     throw error;
   }
 }
+
 
 // =====================================================
 // GET ALL ORDERS
 // =====================================================
 async function getAllOrders() {
-
   try {
-
     const query = `
       SELECT
-
         o.order_id,
         o.order_date,
         o.active_order,
 
+        e.employee_id,
         ei.employee_first_name,
         ei.employee_last_name,
 
         ci.customer_id,
         c.customer_first_name,
         c.customer_last_name,
-
         ci.customer_email,
         ci.customer_phone_number,
 
@@ -266,33 +243,36 @@ async function getAllOrders() {
         v.device_model,
         v.device_year,
         v.device_brand,
+        v.device_type,
+        v.device_serial,
 
         oi.order_total_price,
         oi.estimated_completion_date,
+        oi.completion_date,
 
         os.order_status
 
       FROM orders o
 
-      JOIN employee e
+      INNER JOIN employee e
         ON o.employee_id = e.employee_id
 
-      JOIN employee_info ei
+      INNER JOIN employee_info ei
         ON e.employee_id = ei.employee_id
 
-      JOIN customer_identifier ci
+      INNER JOIN customer_identifier ci
         ON o.customer_id = ci.customer_id
 
-      JOIN customer_info c
+      INNER JOIN customer_info c
         ON ci.customer_id = c.customer_id
 
-      JOIN customer_device_info v
+      INNER JOIN customer_device_info v
         ON o.device_id = v.device_id
 
-      JOIN order_info oi
+      INNER JOIN order_info oi
         ON o.order_id = oi.order_id
 
-      JOIN order_status os
+      INNER JOIN order_status os
         ON o.order_id = os.order_id
 
       ORDER BY o.order_id DESC
@@ -301,25 +281,19 @@ async function getAllOrders() {
     return await conn.query(query);
 
   } catch (error) {
-
-    console.log("GET ALL ORDERS ERROR:");
-
-    console.log(error);
-
+    console.log("GET ALL ORDERS ERROR:", error);
     throw error;
   }
 }
+
 
 // =====================================================
 // GET SINGLE ORDER
 // =====================================================
 async function getSingleOrder(orderId) {
-
   try {
-
     const query = `
       SELECT
-
         o.order_id,
         o.employee_id,
         o.customer_id,
@@ -360,26 +334,24 @@ async function getSingleOrder(orderId) {
     return rows[0];
 
   } catch (error) {
-
-    console.log("GET SINGLE ORDER ERROR:");
-
-    console.log(error);
-
+    console.log("GET SINGLE ORDER ERROR:", error);
     throw error;
   }
 }
+
 
 // =====================================================
 // UPDATE ORDER
 // =====================================================
 async function updateOrder(orderId, data) {
-
   try {
 
+    // =================================================
+    // CHECK ORDER EXISTS
+    // =================================================
     const orderRows = await conn.query(
       `
       SELECT
-
         o.employee_id,
         o.customer_id,
         o.device_id,
@@ -412,8 +384,10 @@ async function updateOrder(orderId, data) {
 
     const current = orderRows[0];
 
+    // =================================================
+    // FINAL VALUES
+    // =================================================
     const updated = {
-
       employee_id:
         data.employee_id ?? current.employee_id,
 
@@ -453,18 +427,63 @@ async function updateOrder(orderId, data) {
     };
 
     // =================================================
-    // UPDATE MAIN ORDER
+    // VALIDATE EMPLOYEE
     // =================================================
+    const employee = await conn.query(
+      `
+      SELECT employee_id
+      FROM employee
+      WHERE employee_id = ?
+      `,
+      [updated.employee_id]
+    );
 
+    if (!employee || employee.length === 0) {
+      throw new Error("Employee ID does not exist");
+    }
+
+    // =================================================
+    // VALIDATE CUSTOMER
+    // =================================================
+    const customer = await conn.query(
+      `
+      SELECT customer_id
+      FROM customer_identifier
+      WHERE customer_id = ?
+      `,
+      [updated.customer_id]
+    );
+
+    if (!customer || customer.length === 0) {
+      throw new Error("Customer ID does not exist");
+    }
+
+    // =================================================
+    // VALIDATE DEVICE
+    // =================================================
+    const device = await conn.query(
+      `
+      SELECT device_id
+      FROM customer_device_info
+      WHERE device_id = ?
+      `,
+      [updated.device_id]
+    );
+
+    if (!device || device.length === 0) {
+      throw new Error("Device ID does not exist");
+    }
+
+    // =================================================
+    // UPDATE ORDERS
+    // =================================================
     await conn.query(
       `
       UPDATE orders
-
       SET
         employee_id = ?,
         customer_id = ?,
         device_id = ?
-
       WHERE order_id = ?
       `,
       [
@@ -478,11 +497,9 @@ async function updateOrder(orderId, data) {
     // =================================================
     // UPDATE ORDER INFO
     // =================================================
-
     await conn.query(
       `
       UPDATE order_info
-
       SET
         order_total_price = ?,
         estimated_completion_date = ?,
@@ -490,7 +507,6 @@ async function updateOrder(orderId, data) {
         additional_request = ?,
         notes_for_internal_use = ?,
         notes_for_customer = ?
-
       WHERE order_id = ?
       `,
       [
@@ -505,15 +521,12 @@ async function updateOrder(orderId, data) {
     );
 
     // =================================================
-    // UPDATE STATUS
+    // UPDATE ORDER STATUS
     // =================================================
-
     await conn.query(
       `
       UPDATE order_status
-
       SET order_status = ?
-
       WHERE order_id = ?
       `,
       [
@@ -525,9 +538,9 @@ async function updateOrder(orderId, data) {
     // =================================================
     // UPDATE SERVICES
     // =================================================
-
     if (Array.isArray(data.services)) {
 
+      // Delete old services
       await conn.query(
         `
         DELETE FROM order_services
@@ -536,7 +549,24 @@ async function updateOrder(orderId, data) {
         [orderId]
       );
 
+      // Insert new services
       for (const service of data.services) {
+
+        // Validate service
+        const serviceExists = await conn.query(
+          `
+          SELECT service_id
+          FROM common_services
+          WHERE service_id = ?
+          `,
+          [service.service_id]
+        );
+
+        if (!serviceExists || serviceExists.length === 0) {
+          throw new Error(
+            `Service ID ${service.service_id} does not exist`
+          );
+        }
 
         await conn.query(
           `
@@ -558,26 +588,41 @@ async function updateOrder(orderId, data) {
 
     return {
       success: true,
+      message: "Order updated successfully",
     };
 
   } catch (error) {
-
-    console.log("UPDATE ORDER ERROR:");
-
-    console.log(error);
-
+    console.log("UPDATE ORDER ERROR:", error);
     throw error;
   }
 }
+
 
 // =====================================================
 // DELETE ORDER
 // =====================================================
 async function deleteOrder(orderId) {
-
   try {
 
-    // CHILD TABLES FIRST
+    // =================================================
+    // CHECK ORDER EXISTS
+    // =================================================
+    const order = await conn.query(
+      `
+      SELECT order_id
+      FROM orders
+      WHERE order_id = ?
+      `,
+      [orderId]
+    );
+
+    if (!order || order.length === 0) {
+      throw new Error("Order not found");
+    }
+
+    // =================================================
+    // DELETE CHILD TABLES FIRST
+    // =================================================
 
     await conn.query(
       `
@@ -603,7 +648,9 @@ async function deleteOrder(orderId) {
       [orderId]
     );
 
-    // MAIN TABLE
+    // =================================================
+    // DELETE MAIN ORDER
+    // =================================================
 
     await conn.query(
       `
@@ -619,12 +666,11 @@ async function deleteOrder(orderId) {
     };
 
   } catch (error) {
-
     console.log("DELETE ORDER ERROR:", error);
-
     throw error;
   }
 }
+
 
 // =====================================================
 // EXPORT
@@ -636,3 +682,4 @@ module.exports = {
   updateOrder,
   deleteOrder,
 };
+```
