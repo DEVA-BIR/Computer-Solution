@@ -267,51 +267,178 @@ async function getSingleOrder(orderId) {
 async function updateOrder(orderId, data) {
   try {
 
-    // GET device ID OF CURRENT ORDER ONLY
     const orderRows = await conn.query(
-  `SELECT device_id FROM orders WHERE order_id = ?`,
-  [orderId]
-);
+      `
+      SELECT
+        o.employee_id,
+        o.customer_id,
+        o.device_id,
 
-if (!orderRows || orderRows.length === 0) {
-  throw new Error("Order not found");
-}
+        oi.order_total_price,
+        oi.estimated_completion_date,
+        oi.completion_date,
+        oi.additional_request,
+        oi.notes_for_internal_use,
+        oi.notes_for_customer,
 
-const deviceId = orderRows[0].device_id;
+        os.order_status
 
-    // UPDATE device
-    await conn.query(
-      `UPDATE customer_device_info
-       SET device_make = ?,
-           device_model = ?,
-           device_year = ?,
-           device_brand = ?
-       WHERE device_id = ?`,
-      [
-        data.device_make,
-        data.device_model,
-        data.device_year,
-        data.device_brand,
-        deviceId,
-      ]
+      FROM orders o
+
+      LEFT JOIN order_info oi
+        ON o.order_id = oi.order_id
+
+      LEFT JOIN order_status os
+        ON o.order_id = os.order_id
+
+      WHERE o.order_id = ?
+      `,
+      [orderId]
     );
 
-    // UPDATE ORDER STATUS
+    if (!orderRows || orderRows.length === 0) {
+      throw new Error("Order not found");
+    }
+
+    const current = orderRows[0];
+
+    const updated = {
+      employee_id: data.employee_id ?? current.employee_id,
+      customer_id: data.customer_id ?? current.customer_id,
+      device_id: data.device_id ?? current.device_id,
+
+      order_total_price:
+        data.order_total_price ?? current.order_total_price,
+
+      estimated_completion_date:
+        data.estimated_completion_date ??
+        current.estimated_completion_date,
+
+      completion_date:
+        data.completion_date ??
+        current.completion_date,
+
+      additional_request:
+        data.additional_request ??
+        current.additional_request,
+
+      notes_for_internal_use:
+        data.notes_for_internal_use ??
+        current.notes_for_internal_use,
+
+      notes_for_customer:
+        data.notes_for_customer ??
+        current.notes_for_customer,
+
+      order_status:
+        data.order_status ??
+        current.order_status,
+    };
+
     await conn.query(
-      `UPDATE order_status
-       SET order_status = ?
-       WHERE order_id = ?`,
+      `
+      UPDATE orders
+
+      SET
+
+      employee_id=?,
+      customer_id=?,
+      device_id=?
+
+      WHERE order_id=?
+      `,
       [
-        data.order_status,
+        updated.employee_id,
+        updated.customer_id,
+        updated.device_id,
         orderId,
       ]
     );
 
-    return { success: true };
+    await conn.query(
+      `
+      UPDATE order_info
+
+      SET
+
+      order_total_price=?,
+      estimated_completion_date=?,
+      completion_date=?,
+      additional_request=?,
+      notes_for_internal_use=?,
+      notes_for_customer=?
+
+      WHERE order_id=?
+      `,
+      [
+        updated.order_total_price,
+        updated.estimated_completion_date,
+        updated.completion_date,
+        updated.additional_request,
+        updated.notes_for_internal_use,
+        updated.notes_for_customer,
+        orderId,
+      ]
+    );
+
+    await conn.query(
+      `
+      UPDATE order_status
+
+      SET
+
+      order_status=?
+
+      WHERE order_id=?
+      `,
+      [
+        updated.order_status,
+        orderId,
+      ]
+    );
+
+    if (Array.isArray(data.services)) {
+
+      await conn.query(
+        `DELETE FROM order_services WHERE order_id=?`,
+        [orderId]
+      );
+
+      for (const service of data.services) {
+
+        await conn.query(
+          `
+          INSERT INTO order_services
+          (
+            order_id,
+            service_id,
+            service_completed
+          )
+
+          VALUES
+          (?, ?, ?)
+          `,
+          [
+            orderId,
+            service.service_id,
+            service.service_completed ?? 0,
+          ]
+        );
+
+      }
+
+    }
+
+    return {
+      success: true,
+    };
 
   } catch (error) {
-    console.log("UPDATE ORDER ERROR:", error);
+
+    console.log(error);
+
     throw error;
+
   }
 }
 async function deleteOrder(orderId) {
