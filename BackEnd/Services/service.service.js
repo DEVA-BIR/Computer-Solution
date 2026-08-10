@@ -1,8 +1,9 @@
 const conn = require("../Config/dbconfig");
 
+// =====================================================
 // CREATE SERVICE
+// =====================================================
 async function createService(serviceData) {
-
   try {
 
     const {
@@ -10,20 +11,41 @@ async function createService(serviceData) {
       service_description,
     } = serviceData;
 
+    // =================================================
+    // GENERATE SERVICE ID MANUALLY
+    // =================================================
+    const idResult = await conn.query(`
+      SELECT COALESCE(MAX(service_id), 0) + 1 AS nextServiceId
+      FROM common_services
+    `);
+
+    const service_id = Number(
+      idResult[0].nextServiceId
+    );
+
+    // =================================================
+    // INSERT SERVICE
+    // =================================================
     const query = `
       INSERT INTO common_services (
+        service_id,
         service_name,
         service_description
       )
-      VALUES (?, ?)
+      VALUES (?, ?, ?)
     `;
 
     const result = await conn.query(query, [
+      service_id,
       service_name,
       service_description,
     ]);
 
-    return result;
+    return {
+      success: true,
+      service_id: service_id,
+      result: result,
+    };
 
   } catch (error) {
 
@@ -33,9 +55,11 @@ async function createService(serviceData) {
   }
 }
 
-// GET ALL SERVICES
-async function getAllServices() {
 
+// =====================================================
+// GET ALL SERVICES
+// =====================================================
+async function getAllServices() {
   try {
 
     const query = `
@@ -56,9 +80,11 @@ async function getAllServices() {
   }
 }
 
-// UPDATE SERVICE
-async function updateService(service_id, data) {
 
+// =====================================================
+// UPDATE SERVICE
+// =====================================================
+async function updateService(service_id, data) {
   try {
 
     const {
@@ -90,9 +116,11 @@ async function updateService(service_id, data) {
   }
 }
 
-// DELETE SERVICE
-async function deleteService(service_id) {
 
+// =====================================================
+// DELETE SERVICE
+// =====================================================
+async function deleteService(service_id) {
   try {
 
     const query = `
@@ -114,6 +142,10 @@ async function deleteService(service_id) {
   }
 }
 
+
+// =====================================================
+// EXPORT
+// =====================================================
 module.exports = {
   createService,
   getAllServices,
