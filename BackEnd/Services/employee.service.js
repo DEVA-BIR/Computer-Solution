@@ -20,31 +20,66 @@ async function checkIfEmployeeExists(email) {
 
 
 }
-
 // =====================================================
 // CREATE EMPLOYEE
 // =====================================================
 async function createEmployee(employee) {
-
-
   try {
-    // Generate next employee ID manually
-    const idResult = await conn.query(`
+    // =================================================
+    // 1. GENERATE EMPLOYEE ID
+    // =================================================
+    const employeeIdResult = await conn.query(`
       SELECT COALESCE(MAX(employee_id), 0) + 1 AS nextEmployeeId
       FROM employee
     `);
 
-    const employee_id = idResult[0].nextEmployeeId;
+    const employee_id = employeeIdResult[0].nextEmployeeId;
 
-    // Hash password
+    // =================================================
+    // 2. GENERATE EMPLOYEE INFO ID
+    // =================================================
+    const employeeInfoIdResult = await conn.query(`
+      SELECT COALESCE(MAX(employee_info_id), 0) + 1 AS nextEmployeeInfoId
+      FROM employee_info
+    `);
+
+    const employee_info_id =
+      employeeInfoIdResult[0].nextEmployeeInfoId;
+
+    // =================================================
+    // 3. GENERATE EMPLOYEE PASS ID
+    // =================================================
+    const employeePassIdResult = await conn.query(`
+      SELECT COALESCE(MAX(employee_pass_id), 0) + 1 AS nextEmployeePassId
+      FROM employee_pass
+    `);
+
+    const employee_pass_id =
+      employeePassIdResult[0].nextEmployeePassId;
+
+    // =================================================
+    // 4. GENERATE EMPLOYEE ROLE ID
+    // =================================================
+    const employeeRoleIdResult = await conn.query(`
+      SELECT COALESCE(MAX(employee_role_id), 0) + 1 AS nextEmployeeRoleId
+      FROM employee_role
+    `);
+
+    const employee_role_id =
+      employeeRoleIdResult[0].nextEmployeeRoleId;
+
+    // =================================================
+    // 5. HASH PASSWORD
+    // =================================================
     const salt = await bcrypt.genSalt(10);
+
     const hashedPassword = await bcrypt.hash(
       employee.employee_password,
       salt
     );
 
     // =================================================
-    // 1. INSERT EMPLOYEE
+    // 6. INSERT INTO EMPLOYEE
     // =================================================
     const employeeQuery = `
       INSERT INTO employee (
@@ -66,19 +101,21 @@ async function createEmployee(employee) {
     }
 
     // =================================================
-    // 2. INSERT EMPLOYEE INFO
+    // 7. INSERT INTO EMPLOYEE INFO
     // =================================================
     await conn.query(
       `
       INSERT INTO employee_info (
+        employee_info_id,
         employee_id,
         employee_first_name,
         employee_last_name,
         employee_phone
       )
-      VALUES (?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?)
       `,
       [
+        employee_info_id,
         employee_id,
         employee.employee_first_name,
         employee.employee_last_name,
@@ -87,36 +124,46 @@ async function createEmployee(employee) {
     );
 
     // =================================================
-    // 3. INSERT PASSWORD
+    // 8. INSERT PASSWORD
     // =================================================
     await conn.query(
       `
       INSERT INTO employee_pass (
+        employee_pass_id,
         employee_id,
         employee_password_hashed
       )
-      VALUES (?, ?)
+      VALUES (?, ?, ?)
       `,
-      [employee_id, hashedPassword]
+      [
+        employee_pass_id,
+        employee_id,
+        hashedPassword,
+      ]
     );
 
     // =================================================
-    // 4. INSERT ROLE
+    // 9. INSERT ROLE
     // =================================================
     await conn.query(
       `
       INSERT INTO employee_role (
+        employee_role_id,
         employee_id,
         company_role_id
       )
-      VALUES (?, ?)
+      VALUES (?, ?, ?)
       `,
       [
+        employee_role_id,
         employee_id,
         employee.company_role_id ?? 3,
       ]
     );
 
+    // =================================================
+    // 10. RETURN CREATED EMPLOYEE
+    // =================================================
     return {
       employee_id,
     };
@@ -124,11 +171,8 @@ async function createEmployee(employee) {
   } catch (error) {
     console.log("Create Employee Service Error:", error);
     throw error;
-
-
   }
 }
-
 // =====================================================
 // GET EMPLOYEE BY EMAIL
 // =====================================================
