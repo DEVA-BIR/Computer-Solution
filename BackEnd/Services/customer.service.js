@@ -137,7 +137,6 @@ async function getCustomerByEmail(customer_email) {
 // GET ALL CUSTOMERS
 // =====================================================
 async function getAllCustomers() {
-
   const query = `
     SELECT
       ci.customer_id,
@@ -146,19 +145,15 @@ async function getAllCustomers() {
       c.customer_email,
       c.customer_phone_number,
       c.customer_added_date,
-     ci.active_customer_status
-
+      ci.active_customer_status
     FROM customer_info ci
-
     LEFT JOIN customer_identifier c
       ON ci.customer_id = c.customer_id
-
     ORDER BY ci.customer_id DESC
   `;
 
   return await conn.query(query);
 }
-
 // =====================================================
 // UPDATE CUSTOMER
 // =====================================================
