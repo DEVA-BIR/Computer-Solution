@@ -1,4 +1,3 @@
-```javascript
 const conn = require("../Config/dbconfig.js");
 const crypto = require("crypto");
 
