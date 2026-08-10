@@ -120,7 +120,7 @@ async function getCustomerByEmail(customer_email) {
 
       c.customer_first_name,
       c.customer_last_name,
-      c.active_customer_status
+     ci.active_customer_status
 
     FROM customer_identifier ci
 
@@ -146,7 +146,7 @@ async function getAllCustomers() {
       c.customer_email,
       c.customer_phone_number,
       c.customer_added_date,
-      c.active_customer_status
+     ci.active_customer_status
 
     FROM customer_info ci
 
