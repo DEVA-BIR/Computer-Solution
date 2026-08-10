@@ -8,7 +8,7 @@ async function createOrder(orderData) {
   try {
 
     // =================================================
-    // VALIDATE EMPLOYEE
+    // 1. VALIDATE EMPLOYEE
     // =================================================
     const employee = await conn.query(
       `
@@ -24,7 +24,7 @@ async function createOrder(orderData) {
     }
 
     // =================================================
-    // VALIDATE CUSTOMER
+    // 2. VALIDATE CUSTOMER
     // =================================================
     const customer = await conn.query(
       `
@@ -40,7 +40,7 @@ async function createOrder(orderData) {
     }
 
     // =================================================
-    // VALIDATE DEVICE
+    // 3. VALIDATE DEVICE
     // =================================================
     const device = await conn.query(
       `
@@ -56,7 +56,7 @@ async function createOrder(orderData) {
     }
 
     // =================================================
-    // VALIDATE SERVICES
+    // 4. VALIDATE SERVICES
     // =================================================
     if (
       Array.isArray(orderData.services) &&
@@ -82,7 +82,7 @@ async function createOrder(orderData) {
     }
 
     // =================================================
-    // GENERATE ORDER ID
+    // 5. GENERATE ORDER ID
     // =================================================
     const orderIdResult = await conn.query(
       `
@@ -91,10 +91,12 @@ async function createOrder(orderData) {
       `
     );
 
-    const order_id = Number(orderIdResult[0].nextOrderId);
+    const order_id = Number(
+      orderIdResult[0].nextOrderId
+    );
 
     // =================================================
-    // GENERATE ORDER INFO ID
+    // 6. GENERATE ORDER INFO ID
     // =================================================
     const orderInfoIdResult = await conn.query(
       `
@@ -103,18 +105,33 @@ async function createOrder(orderData) {
       `
     );
 
-    const order_info_id =
-      Number(orderInfoIdResult[0].nextOrderInfoId);
+    const order_info_id = Number(
+      orderInfoIdResult[0].nextOrderInfoId
+    );
 
     // =================================================
-    // GENERATE ORDER HASH
+    // 7. GENERATE ORDER STATUS ID
+    // =================================================
+    const orderStatusIdResult = await conn.query(
+      `
+      SELECT COALESCE(MAX(order_status_id), 0) + 1 AS nextOrderStatusId
+      FROM order_status
+      `
+    );
+
+    const order_status_id = Number(
+      orderStatusIdResult[0].nextOrderStatusId
+    );
+
+    // =================================================
+    // 8. GENERATE ORDER HASH
     // =================================================
     const orderHash = crypto
       .randomBytes(16)
       .toString("hex");
 
     // =================================================
-    // INSERT INTO ORDERS
+    // 9. INSERT INTO ORDERS
     // =================================================
     const orderQuery = `
       INSERT INTO orders (
@@ -145,7 +162,7 @@ async function createOrder(orderData) {
     }
 
     // =================================================
-    // INSERT INTO ORDER INFO
+    // 10. INSERT INTO ORDER INFO
     // =================================================
     const orderInfoQuery = `
       INSERT INTO order_info (
@@ -178,56 +195,78 @@ async function createOrder(orderData) {
     );
 
     // =================================================
-    // INSERT INTO ORDER SERVICES
+    // 11. INSERT INTO ORDER SERVICES
     // =================================================
     if (
       Array.isArray(orderData.services) &&
       orderData.services.length > 0
     ) {
+
+      // Generate first order_service_id
+      const orderServiceIdResult = await conn.query(
+        `
+        SELECT COALESCE(MAX(order_service_id), 0) + 1
+        AS nextOrderServiceId
+        FROM order_services
+        `
+      );
+
+      let order_service_id = Number(
+        orderServiceIdResult[0].nextOrderServiceId
+      );
+
       for (const service of orderData.services) {
 
         await conn.query(
           `
           INSERT INTO order_services (
+            order_service_id,
             order_id,
             service_id,
             service_completed
           )
-          VALUES (?, ?, ?)
+          VALUES (?, ?, ?, ?)
           `,
           [
+            order_service_id,
             order_id,
             service.service_id,
             service.service_completed ?? 0,
           ]
         );
+
+        // Increment manually for next service
+        order_service_id++;
       }
     }
 
     // =================================================
-    // INSERT INTO ORDER STATUS
+    // 12. INSERT INTO ORDER STATUS
     // =================================================
     await conn.query(
       `
       INSERT INTO order_status (
+        order_status_id,
         order_id,
         order_status
       )
-      VALUES (?, ?)
+      VALUES (?, ?, ?)
       `,
       [
+        order_status_id,
         order_id,
         orderData.order_status || "Pending",
       ]
     );
 
     // =================================================
-    // RETURN SUCCESS
+    // 13. RETURN SUCCESS
     // =================================================
     return {
       success: true,
       order_id: order_id,
       order_info_id: order_info_id,
+      order_status_id: order_status_id,
       order_hash: orderHash,
     };
 
@@ -238,8 +277,6 @@ async function createOrder(orderData) {
     throw error;
   }
 }
-
-
 // =====================================================
 // GET ALL ORDERS
 // =====================================================
