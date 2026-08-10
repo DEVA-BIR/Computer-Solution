@@ -1,5 +1,5 @@
 ```javascript
-const conn = require("../Config/dbconfig");
+const conn = require("../Config/dbconfig.js");
 const crypto = require("crypto");
 
 // =====================================================
@@ -7,6 +7,7 @@ const crypto = require("crypto");
 // =====================================================
 async function createOrder(orderData) {
   try {
+
     // =================================================
     // VALIDATE EMPLOYEE
     // =================================================
@@ -63,6 +64,7 @@ async function createOrder(orderData) {
       orderData.services.length > 0
     ) {
       for (const service of orderData.services) {
+
         const serviceExists = await conn.query(
           `
           SELECT service_id
@@ -83,14 +85,27 @@ async function createOrder(orderData) {
     // =================================================
     // GENERATE ORDER ID
     // =================================================
-    const idResult = await conn.query(
+    const orderIdResult = await conn.query(
       `
       SELECT COALESCE(MAX(order_id), 0) + 1 AS nextOrderId
       FROM orders
       `
     );
 
-    const order_id = Number(idResult[0].nextOrderId);
+    const order_id = Number(orderIdResult[0].nextOrderId);
+
+    // =================================================
+    // GENERATE ORDER INFO ID
+    // =================================================
+    const orderInfoIdResult = await conn.query(
+      `
+      SELECT COALESCE(MAX(order_info_id), 0) + 1 AS nextOrderInfoId
+      FROM order_info
+      `
+    );
+
+    const order_info_id =
+      Number(orderInfoIdResult[0].nextOrderInfoId);
 
     // =================================================
     // GENERATE ORDER HASH
@@ -135,6 +150,7 @@ async function createOrder(orderData) {
     // =================================================
     const orderInfoQuery = `
       INSERT INTO order_info (
+        order_info_id,
         order_id,
         order_total_price,
         estimated_completion_date,
@@ -144,12 +160,13 @@ async function createOrder(orderData) {
         notes_for_customer,
         additional_requests_completed
       )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     await conn.query(
       orderInfoQuery,
       [
+        order_info_id,
         order_id,
         orderData.order_total_price ?? 0,
         orderData.estimated_completion_date || null,
@@ -169,6 +186,7 @@ async function createOrder(orderData) {
       orderData.services.length > 0
     ) {
       for (const service of orderData.services) {
+
         await conn.query(
           `
           INSERT INTO order_services (
@@ -204,14 +222,20 @@ async function createOrder(orderData) {
       ]
     );
 
+    // =================================================
+    // RETURN SUCCESS
+    // =================================================
     return {
       success: true,
       order_id: order_id,
+      order_info_id: order_info_id,
       order_hash: orderHash,
     };
 
   } catch (error) {
+
     console.log("CREATE ORDER ERROR:", error);
+
     throw error;
   }
 }
@@ -222,57 +246,53 @@ async function createOrder(orderData) {
 // =====================================================
 async function getAllOrders() {
   try {
+
     const query = `
       SELECT
         o.order_id,
         o.order_date,
         o.active_order,
 
-        e.employee_id,
         ei.employee_first_name,
         ei.employee_last_name,
 
-        ci.customer_id,
         c.customer_first_name,
         c.customer_last_name,
+
         ci.customer_email,
         ci.customer_phone_number,
 
-        v.device_id,
         v.device_make,
         v.device_model,
         v.device_year,
         v.device_brand,
-        v.device_type,
-        v.device_serial,
 
         oi.order_total_price,
         oi.estimated_completion_date,
-        oi.completion_date,
 
         os.order_status
 
       FROM orders o
 
-      INNER JOIN employee e
+      JOIN employee e
         ON o.employee_id = e.employee_id
 
-      INNER JOIN employee_info ei
+      JOIN employee_info ei
         ON e.employee_id = ei.employee_id
 
-      INNER JOIN customer_identifier ci
+      JOIN customer_identifier ci
         ON o.customer_id = ci.customer_id
 
-      INNER JOIN customer_info c
+      JOIN customer_info c
         ON ci.customer_id = c.customer_id
 
-      INNER JOIN customer_device_info v
+      JOIN customer_device_info v
         ON o.device_id = v.device_id
 
-      INNER JOIN order_info oi
+      JOIN order_info oi
         ON o.order_id = oi.order_id
 
-      INNER JOIN order_status os
+      JOIN order_status os
         ON o.order_id = os.order_id
 
       ORDER BY o.order_id DESC
@@ -281,7 +301,9 @@ async function getAllOrders() {
     return await conn.query(query);
 
   } catch (error) {
+
     console.log("GET ALL ORDERS ERROR:", error);
+
     throw error;
   }
 }
@@ -292,6 +314,7 @@ async function getAllOrders() {
 // =====================================================
 async function getSingleOrder(orderId) {
   try {
+
     const query = `
       SELECT
         o.order_id,
@@ -334,7 +357,9 @@ async function getSingleOrder(orderId) {
     return rows[0];
 
   } catch (error) {
+
     console.log("GET SINGLE ORDER ERROR:", error);
+
     throw error;
   }
 }
@@ -540,7 +565,6 @@ async function updateOrder(orderId, data) {
     // =================================================
     if (Array.isArray(data.services)) {
 
-      // Delete old services
       await conn.query(
         `
         DELETE FROM order_services
@@ -549,10 +573,8 @@ async function updateOrder(orderId, data) {
         [orderId]
       );
 
-      // Insert new services
       for (const service of data.services) {
 
-        // Validate service
         const serviceExists = await conn.query(
           `
           SELECT service_id
@@ -592,7 +614,9 @@ async function updateOrder(orderId, data) {
     };
 
   } catch (error) {
+
     console.log("UPDATE ORDER ERROR:", error);
+
     throw error;
   }
 }
@@ -623,7 +647,6 @@ async function deleteOrder(orderId) {
     // =================================================
     // DELETE CHILD TABLES FIRST
     // =================================================
-
     await conn.query(
       `
       DELETE FROM order_services
@@ -651,7 +674,6 @@ async function deleteOrder(orderId) {
     // =================================================
     // DELETE MAIN ORDER
     // =================================================
-
     await conn.query(
       `
       DELETE FROM orders
@@ -666,7 +688,9 @@ async function deleteOrder(orderId) {
     };
 
   } catch (error) {
+
     console.log("DELETE ORDER ERROR:", error);
+
     throw error;
   }
 }
