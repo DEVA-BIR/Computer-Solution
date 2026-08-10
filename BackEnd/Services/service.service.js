@@ -5,11 +5,17 @@ const conn = require("../Config/dbconfig");
 // =====================================================
 async function createService(serviceData) {
   try {
-
     const {
       service_name,
       service_description,
     } = serviceData;
+
+    // =================================================
+    // VALIDATE SERVICE NAME
+    // =================================================
+    if (!service_name || service_name.trim() === "") {
+      throw new Error("Service name is required");
+    }
 
     // =================================================
     // GENERATE SERVICE ID MANUALLY
@@ -22,6 +28,8 @@ async function createService(serviceData) {
     const service_id = Number(
       idResult[0].nextServiceId
     );
+
+    console.log("Generated Service ID:", service_id);
 
     // =================================================
     // INSERT SERVICE
@@ -37,23 +45,24 @@ async function createService(serviceData) {
 
     const result = await conn.query(query, [
       service_id,
-      service_name,
-      service_description,
+      service_name.trim(),
+      service_description || null,
     ]);
+
+    console.log("Service created:", result);
 
     return {
       success: true,
       service_id: service_id,
-      result: result,
+      service_name: service_name.trim(),
+      service_description: service_description || null,
     };
 
   } catch (error) {
-
-    console.log("Create Service Error:", error);
-
+    console.error("Create Service Error:", error);
     throw error;
   }
-}
+};
 
 
 // =====================================================
@@ -63,7 +72,10 @@ async function getAllServices() {
   try {
 
     const query = `
-      SELECT *
+      SELECT
+        service_id,
+        service_name,
+        service_description
       FROM common_services
       ORDER BY service_id DESC
     `;
@@ -74,11 +86,11 @@ async function getAllServices() {
 
   } catch (error) {
 
-    console.log("Get Services Error:", error);
+    console.error("Get Services Error:", error);
 
     throw error;
   }
-}
+};
 
 
 // =====================================================
@@ -102,7 +114,7 @@ async function updateService(service_id, data) {
 
     const result = await conn.query(query, [
       service_name,
-      service_description,
+      service_description || null,
       service_id,
     ]);
 
@@ -110,11 +122,11 @@ async function updateService(service_id, data) {
 
   } catch (error) {
 
-    console.log("Update Service Error:", error);
+    console.error("Update Service Error:", error);
 
     throw error;
   }
-}
+};
 
 
 // =====================================================
@@ -136,11 +148,11 @@ async function deleteService(service_id) {
 
   } catch (error) {
 
-    console.log("Delete Service Error:", error);
+    console.error("Delete Service Error:", error);
 
     throw error;
   }
-}
+};
 
 
 // =====================================================
