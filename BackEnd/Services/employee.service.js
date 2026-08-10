@@ -12,7 +12,6 @@ async function checkIfEmployeeExists(email) {
   `;
 
   const rows = await conn.query(query, [email]);
-
   return rows.length > 0;
 }
 
@@ -43,21 +42,33 @@ async function createEmployee(employee) {
       ]
     );
 
-    // Get the AUTO_INCREMENT employee_id
     const employee_id = employeeResult.insertId;
 
     // 2. INSERT EMPLOYEE INFO
+    // Manually generate employee_info_id because
+    // Render database does not have AUTO_INCREMENT on this column.
+    const infoResult = await conn.query(
+      `
+      SELECT COALESCE(MAX(employee_info_id), 0) + 1 AS next_id
+      FROM employee_info
+      `
+    );
+
+    const employee_info_id = infoResult[0].next_id;
+
     await conn.query(
       `
       INSERT INTO employee_info (
+        employee_info_id,
         employee_id,
         employee_first_name,
         employee_last_name,
         employee_phone
       )
-      VALUES (?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?)
       `,
       [
+        employee_info_id,
         employee_id,
         employee.employee_first_name,
         employee.employee_last_name,
@@ -104,6 +115,7 @@ async function createEmployee(employee) {
     throw error;
   }
 }
+
 // =====================================================
 // GET EMPLOYEE BY EMAIL
 // =====================================================
@@ -156,7 +168,6 @@ async function getAllEmployees() {
       ei.employee_phone,
 
       er.company_role_id,
-
       cr.company_role_name
 
     FROM employee e
@@ -180,7 +191,6 @@ async function getAllEmployees() {
 // UPDATE EMPLOYEE
 // =====================================================
 async function updateEmployee(employeeId, employee) {
-
   await conn.query(
     `
     UPDATE employee_info
@@ -194,7 +204,7 @@ async function updateEmployee(employeeId, employee) {
       employee.firstName,
       employee.lastName,
       employee.phone,
-      employeeId,
+      employeeId
     ]
   );
 
@@ -206,11 +216,10 @@ async function updateEmployee(employeeId, employee) {
     `,
     [
       employee.active ? 1 : 0,
-      employeeId,
+      employeeId
     ]
   );
 
-  // Role mapping
   let roleId = 1;
 
   if (employee.role === "Manager") {
@@ -229,7 +238,7 @@ async function updateEmployee(employeeId, employee) {
     `,
     [
       roleId,
-      employeeId,
+      employeeId
     ]
   );
 
@@ -240,7 +249,6 @@ async function updateEmployee(employeeId, employee) {
 // DELETE EMPLOYEE
 // =====================================================
 async function deleteEmployee(employeeId) {
-
   await conn.query(
     `
     DELETE FROM employee_pass
@@ -285,5 +293,5 @@ module.exports = {
   getEmployeeByEmail,
   getAllEmployees,
   updateEmployee,
-  deleteEmployee,
+  deleteEmployee
 };
